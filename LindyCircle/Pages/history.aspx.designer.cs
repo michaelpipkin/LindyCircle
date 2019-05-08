@@ -10,7 +10,7 @@
 namespace LindyCircle.Pages {
     
     
-    public partial class practices {
+    public partial class history {
         
         /// <summary>
         /// odsPractices control.
@@ -76,13 +76,13 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.Button btnFilter;
         
         /// <summary>
-        /// btnClear control.
+        /// btnReset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClear;
+        protected global::System.Web.UI.WebControls.Button btnReset;
         
         /// <summary>
         /// ValidationSummary1 control.
@@ -94,21 +94,12 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
         
         /// <summary>
-        /// lblMessage control.
+        /// Chart1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
-        
-        /// <summary>
-        /// gvPractices control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPractices;
+        protected global::System.Web.UI.DataVisualization.Charting.Chart Chart1;
     }
 }

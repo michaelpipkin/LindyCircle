@@ -44,18 +44,18 @@
                 <asp:Label ID="lblNewPractice" runat="server" Text=""></asp:Label>
                 <br />
                 Rental Cost<asp:TextBox ID="txtNewRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
-                <asp:CompareValidator ID="valNewRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number." 
-                    ControlToValidate="txtNewRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" 
+                <asp:CompareValidator ID="valNewRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number."
+                    ControlToValidate="txtNewRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgNewPractice">*</asp:CompareValidator>
                 <br />
                 Miscellaneous Expense:<asp:TextBox ID="txtNewMiscExpense" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
-                <asp:CompareValidator ID="valNewMiscExpense" runat="server" ErrorMessage="Miscellaneous Expense must be a decimal number." 
-                    ControlToValidate="txtNewMiscExpense" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" 
+                <asp:CompareValidator ID="valNewMiscExpense" runat="server" ErrorMessage="Miscellaneous Expense must be a decimal number."
+                    ControlToValidate="txtNewMiscExpense" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgNewPractice">*</asp:CompareValidator>
                 <br />
                 Miscellaneous Revenue:<asp:TextBox ID="txtNewMiscRevenue" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
-                <asp:CompareValidator ID="valNewMiscRevenue" runat="server" ErrorMessage="Miscellaneous Revenue must be a decimal number." 
-                    ControlToValidate="txtNewMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" 
+                <asp:CompareValidator ID="valNewMiscRevenue" runat="server" ErrorMessage="Miscellaneous Revenue must be a decimal number."
+                    ControlToValidate="txtNewMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgNewPractice">*</asp:CompareValidator>
                 <br />
                 <asp:Button ID="btnYes" runat="server" Text="Add Practice" OnClick="btnYes_Click" />
@@ -70,13 +70,14 @@
                 &nbsp;Unused punches:
                 <asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
                 <br />
-                Payment method:<asp:DropDownList ID="ddlPaymentTypes" runat="server" CssClass="textbox" 
-                    OnSelectedIndexChanged="ddlPaymentTypes_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                Payment method:<asp:DropDownList ID="ddlPaymentTypes" runat="server" CssClass="textbox"
+                    OnSelectedIndexChanged="ddlPaymentTypes_SelectedIndexChanged" AutoPostBack="true">
+                </asp:DropDownList>
                 Amount:<asp:TextBox ID="txtPaymentAmount" runat="server" Width="50px" CssClass="textbox"></asp:TextBox>
-                <asp:CompareValidator ID="valPaymentAmount" runat="server" ErrorMessage="Amount must be a decimal number." 
-                    ControlToValidate="txtPaymentAmount" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" 
+                <asp:CompareValidator ID="valPaymentAmount" runat="server" ErrorMessage="Amount must be a decimal number."
+                    ControlToValidate="txtPaymentAmount" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgAddMember">*</asp:CompareValidator>
-                <asp:Button ID="btnAddToPractice" runat="server" Text="Check in" CssClass="textbox" 
+                <asp:Button ID="btnAddToPractice" runat="server" Text="Check in" CssClass="textbox"
                     OnClick="btnAddToPractice_Click" ValidationGroup="vgAddMember" />
                 <asp:ValidationSummary ID="ValidationSummary3" runat="server" CssClass="warning" ValidationGroup="vgAddMember" />
                 <br />
@@ -99,18 +100,18 @@
                 </asp:GridView>
                 <br />
                 Rental Cost<asp:TextBox ID="txtRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
-                <asp:CompareValidator ID="valRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number." 
-                    ControlToValidate="txtRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" 
+                <asp:CompareValidator ID="valRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number."
+                    ControlToValidate="txtRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
                 <br />
                 Miscellaneous Expense:<asp:TextBox ID="txtMiscExpense" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
-                <asp:CompareValidator ID="valMiscExpense" runat="server" ErrorMessage="Miscellaneous Expense must be a decimal number." 
-                    ControlToValidate="txtMiscExpense" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" 
+                <asp:CompareValidator ID="valMiscExpense" runat="server" ErrorMessage="Miscellaneous Expense must be a decimal number."
+                    ControlToValidate="txtMiscExpense" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
                 <br />
                 Miscellaneous Revenue:<asp:TextBox ID="txtMiscRevenue" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
-                <asp:CompareValidator ID="valMiscRevenue" runat="server" ErrorMessage="Miscellaneous Revenue must be a decimal number." 
-                    ControlToValidate="txtMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" 
+                <asp:CompareValidator ID="valMiscRevenue" runat="server" ErrorMessage="Miscellaneous Revenue must be a decimal number."
+                    ControlToValidate="txtMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
                 <br />
                 <asp:Button ID="btnSave" runat="server" Text="Save expenses/revenue" OnClick="btnSave_Click" ValidationGroup="vgPractice" />

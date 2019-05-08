@@ -37,27 +37,27 @@
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="warning" ValidationGroup="vgNewMember" />
             <asp:Label ID="lblWarning" runat="server" Text="" CssClass="warning" ClientIDMode="Static"></asp:Label>
             <br />
-            <asp:GridView ID="gvMembers" runat="server" DataSourceID="odsMembers" AllowSorting="True" AutoGenerateColumns="False" 
+            <asp:GridView ID="gvMembers" runat="server" DataSourceID="odsMembers" AllowSorting="True" AutoGenerateColumns="False"
                 DataKeyNames="MemberID">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="MemberID" HeaderText="MemberID" Visible="false" />
-                    <asp:BoundField DataField="MemberName" HeaderText="Name" SortExpression="MemberName" ItemStyle-Width="150px" >
-                    <ItemStyle Width="150px" />
+                    <asp:BoundField DataField="MemberName" HeaderText="Name" SortExpression="MemberName" ItemStyle-Width="150px">
+                        <ItemStyle Width="150px" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="Attended" HeaderText="Attended" SortExpression="Attended" ItemStyle-Width="65px" >
-                    <ItemStyle Width="65px" />
+                    <asp:BoundField DataField="Attended" HeaderText="Attended" SortExpression="Attended" ItemStyle-Width="65px">
+                        <ItemStyle Width="65px" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="PunchCards" HeaderText="Punch cards" ItemStyle-Width="65px" >
-                    <ItemStyle Width="65px" />
+                    <asp:BoundField DataField="PunchCards" HeaderText="Punch cards" ItemStyle-Width="65px">
+                        <ItemStyle Width="65px" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="UnusedPunches" HeaderText="Unused punches" ItemStyle-Width="65px" >
-                    <ItemStyle Width="65px" />
+                    <asp:BoundField DataField="UnusedPunches" HeaderText="Unused punches" ItemStyle-Width="65px">
+                        <ItemStyle Width="65px" />
                     </asp:BoundField>
                     <asp:TemplateField HeaderText="Inactive">
                         <ItemStyle HorizontalAlign="Center" Width="50px" />
                         <ItemTemplate>
-                            <asp:CheckBox ID="ckbInactive" runat="server" AutoPostBack="True" 
+                            <asp:CheckBox ID="ckbInactive" runat="server" AutoPostBack="True"
                                 OnCheckedChanged="ckbInactive_CheckedChanged" Checked='<%# Eval("Inactive") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>

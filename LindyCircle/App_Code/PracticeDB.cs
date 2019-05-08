@@ -52,5 +52,26 @@ namespace LindyCircle
                 }
             }
         }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public static DataTable GetPracticeHistoryData(DateTime? startDate, DateTime? endDate) {
+            var dt = new DataTable();
+            dt.Columns.Add("PracticeID", typeof(int));
+            dt.Columns.Add("PracticeDate", typeof(DateTime));
+            dt.Columns.Add("Attendees", typeof(int));
+            using (var db = new LindyCircleContext()) {
+                if (startDate == null)
+                    startDate = db.Practices.Min(t => t.PracticeDate);
+                if (endDate == null)
+                    endDate = db.Practices.Max(t => t.PracticeDate);
+                var query = from t in db.Practices
+                            where t.PracticeDate >= startDate && t.PracticeDate <= endDate
+                            orderby t.PracticeDate ascending
+                            select t;
+                foreach (var row in query)
+                    dt.Rows.Add(row.PracticeID, row.PracticeDate, row.Attendances.Count);
+            }
+            return dt;
+        }
     }
 }

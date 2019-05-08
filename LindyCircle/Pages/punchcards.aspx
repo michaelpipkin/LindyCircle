@@ -56,14 +56,14 @@
                 <Columns>
                     <asp:BoundField DataField="PunchCardID" HeaderText="PunchCardID" Visible="false" />
                     <asp:BoundField DataField="PurchaseDate" HeaderText="Purchase Date" ItemStyle-Width="85px" DataFormatString="{0:yyyy-MM-dd}">
-                    <ItemStyle Width="85px" />
+                        <ItemStyle Width="85px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="PurchaseAmount" HeaderText="Amount" ItemStyle-Width="75px" DataFormatString="{0:n2}">
-                    <ItemStyle Width="75px" />
+                        <ItemStyle Width="75px" />
                     </asp:BoundField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" CommandName="Delete" 
+                            <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" CommandName="Delete"
                                 OnCommand="btnDelete_Command" CommandArgument='<%#Eval("PunchCardID") %>'></asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
