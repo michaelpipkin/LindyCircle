@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LindyCircleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="PracticeID" Type="int" Nullable="false" />
+          <Property Name="PaymentType" Type="int" Nullable="false" />
+          <Property Name="PaymentAmount" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Defaults">
+          <Key>
+            <PropertyRef Name="DefaultID" />
+          </Key>
+          <Property Name="DefaultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DefaultName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DefaultValue" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inactive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Practices">
+          <Key>
+            <PropertyRef Name="PracticeID" />
+          </Key>
+          <Property Name="PracticeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PracticeDate" Type="date" Nullable="false" />
+          <Property Name="PracticeNumber" Type="int" Nullable="false" />
+          <Property Name="PracticeCost" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="MiscExpense" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="MiscRevenue" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PunchCards">
+          <Key>
+            <PropertyRef Name="PunchCardID" />
+          </Key>
+          <Property Name="PunchCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="PurchaseDate" Type="date" Nullable="false" />
+          <Property Name="PurchaseAmount" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Attendance_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_Practices">
+          <End Role="Practices" Type="Self.Practices" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practices">
+              <PropertyRef Name="PracticeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="PracticeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCards_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="PunchCards" Type="Self.PunchCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="PunchCards">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LindyCircleModelStoreContainer">
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbsa" store:Type="Tables" />
+          <EntitySet Name="Defaults" EntityType="Self.Defaults" Schema="dbsa" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbsa" store:Type="Tables" />
+          <EntitySet Name="Practices" EntityType="Self.Practices" Schema="dbsa" store:Type="Tables" />
+          <EntitySet Name="PunchCards" EntityType="Self.PunchCards" Schema="dbsa" store:Type="Tables" />
+          <AssociationSet Name="FK_Attendance_Members" Association="Self.FK_Attendance_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Practices" Association="Self.FK_Attendance_Practices">
+            <End Role="Practices" EntitySet="Practices" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunchCards_Members" Association="Self.FK_PunchCards_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="PunchCards" EntitySet="PunchCards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LindyCircleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="PracticeID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentType" Type="Int32" Nullable="false" />
+          <Property Name="PaymentAmount" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Attendance_Members" FromRole="Attendance" ToRole="Members" />
+          <NavigationProperty Name="Practice" Relationship="Self.FK_Attendance_Practices" FromRole="Attendance" ToRole="Practices" />
+        </EntityType>
+        <EntityType Name="Default">
+          <Key>
+            <PropertyRef Name="DefaultID" />
+          </Key>
+          <Property Name="DefaultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DefaultName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DefaultValue" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Inactive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Members" FromRole="Members" ToRole="Attendance" />
+          <NavigationProperty Name="PunchCards" Relationship="Self.FK_PunchCards_Members" FromRole="Members" ToRole="PunchCards" />
+        </EntityType>
+        <EntityType Name="Practice">
+          <Key>
+            <PropertyRef Name="PracticeID" />
+          </Key>
+          <Property Name="PracticeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PracticeDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PracticeNumber" Type="Int32" Nullable="false" />
+          <Property Name="PracticeCost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="MiscExpense" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="MiscRevenue" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Practices" FromRole="Practices" ToRole="Attendance" />
+        </EntityType>
+        <EntityType Name="PunchCard">
+          <Key>
+            <PropertyRef Name="PunchCardID" />
+          </Key>
+          <Property Name="PunchCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PurchaseAmount" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_PunchCards_Members" FromRole="PunchCards" ToRole="Members" />
+        </EntityType>
+        <Association Name="FK_Attendance_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendance_Practices">
+          <End Role="Practices" Type="Self.Practice" Multiplicity="1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practices">
+              <PropertyRef Name="PracticeID" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="PracticeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCards_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="PunchCards" Type="Self.PunchCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="PunchCards">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LindyCircleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+          <EntitySet Name="Defaults" EntityType="Self.Default" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="Practices" EntityType="Self.Practice" />
+          <EntitySet Name="PunchCards" EntityType="Self.PunchCard" />
+          <AssociationSet Name="FK_Attendance_Members" Association="Self.FK_Attendance_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendance_Practices" Association="Self.FK_Attendance_Practices">
+            <End Role="Practices" EntitySet="Practices" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunchCards_Members" Association="Self.FK_PunchCards_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="PunchCards" EntitySet="PunchCards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LindyCircleModelStoreContainer" CdmEntityContainer="LindyCircleEntities">
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="LindyCircleModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="PracticeID" ColumnName="PracticeID" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Defaults">
+            <EntityTypeMapping TypeName="LindyCircleModel.Default">
+              <MappingFragment StoreEntitySet="Defaults">
+                <ScalarProperty Name="DefaultID" ColumnName="DefaultID" />
+                <ScalarProperty Name="DefaultName" ColumnName="DefaultName" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="LindyCircleModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Practices">
+            <EntityTypeMapping TypeName="LindyCircleModel.Practice">
+              <MappingFragment StoreEntitySet="Practices">
+                <ScalarProperty Name="PracticeID" ColumnName="PracticeID" />
+                <ScalarProperty Name="PracticeDate" ColumnName="PracticeDate" />
+                <ScalarProperty Name="PracticeNumber" ColumnName="PracticeNumber" />
+                <ScalarProperty Name="PracticeCost" ColumnName="PracticeCost" />
+                <ScalarProperty Name="MiscExpense" ColumnName="MiscExpense" />
+                <ScalarProperty Name="MiscRevenue" ColumnName="MiscRevenue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PunchCards">
+            <EntityTypeMapping TypeName="LindyCircleModel.PunchCard">
+              <MappingFragment StoreEntitySet="PunchCards">
+                <ScalarProperty Name="PunchCardID" ColumnName="PunchCardID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
