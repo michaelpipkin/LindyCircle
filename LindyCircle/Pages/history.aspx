@@ -26,7 +26,8 @@
     <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="textbox" CausesValidation="false" OnClick="btnReset_Click" />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="warning" EnableClientScript="True" ValidationGroup="vgFilter" />
     <br />
-    <asp:Chart ID="Chart1" runat="server" DataSourceID="odsPractices" Width="800px" Height="400px">
+    <asp:Chart ID="Chart1" runat="server" DataSourceID="odsPractices" Width="800px" Height="400px" 
+        ImageLocation="~/images/chart" ImageStorageMode="UseImageLocation" ImageType="Png">
         <Series>
             <asp:Series Name="Attendance" ChartType="Line" XValueMember="PracticeDate" YValueMembers="Attendees"
                 Palette="None" XValueType="Date" YValueType="Int32" MarkerStyle="Circle" MarkerSize="8" 
