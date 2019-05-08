@@ -54,7 +54,7 @@
                         <li><a runat="server" href="punchcards">Punch Cards</a></li>
                         <li><a runat="server" href="attendance">Attendance</a></li>
                         <li><a runat="server" href="history">History</a></li>
-                        <li><a runat="server" href="~/">Finances</a></li>
+                        <li><a runat="server" href="finances">Finances</a></li>
                     </ul>
 <%--                    <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>

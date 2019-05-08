@@ -202,6 +202,7 @@
       <LastGenOutput>LindyCircleModel.cs</LastGenOutput>
     </Content>
     <Content Include="Pages\attendance.aspx" />
+    <Content Include="Pages\finances.aspx" />
     <Content Include="Pages\history.aspx" />
     <Content Include="Pages\members.aspx" />
     <Content Include="Pages\practices.aspx" />
@@ -279,6 +280,7 @@
     <Content Include="App_Code\PracticeDB.cs" />
     <Content Include="App_Code\PunchCardDB.cs" />
     <Content Include="App_Code\AttendanceDB.cs" />
+    <Content Include="App_Code\FinanceDB.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -337,6 +339,13 @@
     </Compile>
     <Compile Include="Pages\attendance.aspx.designer.cs">
       <DependentUpon>attendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\finances.aspx.cs">
+      <DependentUpon>finances.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\finances.aspx.designer.cs">
+      <DependentUpon>finances.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\history.aspx.cs">
       <DependentUpon>history.aspx</DependentUpon>

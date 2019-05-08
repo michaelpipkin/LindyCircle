@@ -15,6 +15,7 @@ namespace LindyCircle.Pages
             var member = new Member();
             member.FirstName = txtFirstName.Text;
             member.LastName = txtLastName.Text;
+            member.Inactive = false;
             using (var db = new LindyCircleContext()) {
                 if (db.Members.FirstOrDefault(t => t.FirstName == member.FirstName && t.LastName == member.LastName) == null) {
                     db.Members.Add(member);
