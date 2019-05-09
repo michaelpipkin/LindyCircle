@@ -204,6 +204,7 @@
     <Content Include="Pages\attendance.aspx" />
     <Content Include="Pages\finances.aspx" />
     <Content Include="Pages\history.aspx" />
+    <Content Include="Pages\member.aspx" />
     <Content Include="Pages\members.aspx" />
     <Content Include="Pages\practices.aspx" />
     <Content Include="Pages\punchcards.aspx" />
@@ -353,6 +354,13 @@
     </Compile>
     <Compile Include="Pages\history.aspx.designer.cs">
       <DependentUpon>history.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\member.aspx.cs">
+      <DependentUpon>member.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\member.aspx.designer.cs">
+      <DependentUpon>member.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\members.aspx.cs">
       <DependentUpon>members.aspx</DependentUpon>

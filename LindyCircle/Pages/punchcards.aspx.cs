@@ -55,6 +55,18 @@ namespace LindyCircle.Pages
 
         protected void ddlMembers_DataBound(object sender, EventArgs e) {
             gvPunchCards.DataBind();
+            UpdateUnusedPunches();
+        }
+
+        protected void ddlMembers_SelectedIndexChanged(object sender, EventArgs e) {
+            UpdateUnusedPunches();
+        }
+
+        protected void UpdateUnusedPunches() {
+            using (var db = new LindyCircleContext()) {
+                var memberID = int.Parse(ddlMembers.SelectedValue);
+                lblUnusedPunches.Text = db.Members.First(t => t.MemberID == memberID).RemainingPunches.ToString();
+            }
         }
     }
 }

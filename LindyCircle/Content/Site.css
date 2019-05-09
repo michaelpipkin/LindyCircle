@@ -54,3 +54,7 @@ input[type="select"] {
     text-align: left;
     padding-left: 2px;
 }
+
+th {
+    background-color: #CCCCCC;
+}

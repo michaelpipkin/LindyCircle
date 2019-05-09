@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -39,6 +40,23 @@ namespace LindyCircle
         public static List<Member> GetActiveMemberList() {
             using (var db = new LindyCircleContext())
                 return db.Members.Where(t => !t.Inactive).OrderBy(t => t.FirstName).ThenBy(t => t.LastName).ToList();
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public static DataTable GetMemberHistory(int memberID) {
+            var dt = new DataTable();
+            dt.Columns.Add("PracticeDate", typeof(DateTime));
+            dt.Columns.Add("PaymentType", typeof(string));
+            dt.Columns.Add("PaymentAmount", typeof(decimal));
+            using (var db = new LindyCircleContext()) {
+                var query = from t in db.Attendances
+                            where t.MemberID == memberID
+                            orderby t.Practice.PracticeDate
+                            select t;
+                foreach (var row in query)
+                    dt.Rows.Add(row.Practice.PracticeDate, row.PaymentTypeText, row.PaymentAmount);
+            }
+            return dt;
         }
     }
 }

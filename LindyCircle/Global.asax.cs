@@ -29,6 +29,7 @@ namespace LindyCircle
             routes.MapPageRoute("AttendancesRoute", "attendance", "~/Pages/attendance.aspx");
             routes.MapPageRoute("HistoryRoute", "history", "~/Pages/history.aspx");
             routes.MapPageRoute("FinancesRoute", "finances", "~/Pages/finances.aspx");
+            routes.MapPageRoute("MemberRoute", "member/{memberID}", "~/Pages/member.aspx");
         }
     }
 }

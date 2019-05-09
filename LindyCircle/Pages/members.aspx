@@ -11,6 +11,11 @@
             }
         }
     </script>
+    <style type="text/css">
+        a {
+            color: black;
+        }
+    </style>
     <asp:ObjectDataSource ID="odsMembers" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetMembers" TypeName="LindyCircle.MemberDB">
         <SelectParameters>
@@ -42,9 +47,15 @@
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="MemberID" HeaderText="MemberID" Visible="false" />
-                    <asp:BoundField DataField="MemberName" HeaderText="Name" SortExpression="MemberName" ItemStyle-Width="150px">
+                    <asp:TemplateField HeaderText="Name" ItemStyle-Width="150px" SortExpression="MemberName">
+                        <ItemTemplate>
+                            <a href="member/<%# Eval("MemberID") %>">
+                                <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("MemberName") %>'></asp:Label></a>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+<%--                    <asp:BoundField DataField="MemberName" HeaderText="Name" SortExpression="MemberName" ItemStyle-Width="150px">
                         <ItemStyle Width="150px" />
-                    </asp:BoundField>
+                    </asp:BoundField>--%>
                     <asp:BoundField DataField="Attended" HeaderText="Attended" SortExpression="Attended" ItemStyle-Width="65px">
                         <ItemStyle Width="65px" />
                     </asp:BoundField>
