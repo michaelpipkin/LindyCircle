@@ -49,16 +49,14 @@
         <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
         <Columns>
             <asp:BoundField DataField="PracticeID" HeaderText="PracticeID" Visible="false" />
-            <asp:TemplateField HeaderText="Number" ItemStyle-Width="50px" SortExpression="MemberName" FooterText="Totals"
+            <asp:TemplateField HeaderText="Number" ItemStyle-Width="50px" SortExpression="PracticeNumber" FooterText="Totals"
                 ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align">
                 <ItemTemplate>
                     <a href="practice/<%# Eval("PracticeID") %>">
                         <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("PracticeNumber") %>'></asp:Label></a>
                 </ItemTemplate>
             </asp:TemplateField>
-<%--            <asp:BoundField DataField="PracticeNumber" HeaderText="Number" ItemStyle-Width="50px" FooterText="Totals"
-                ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align" />--%>
-            <asp:BoundField DataField="PracticeDate" HeaderText="Date" SortExpression="PracticeDate" HeaderStyle-CssClass="column-left-align"
+            <asp:BoundField DataField="PracticeDate" HeaderText="Date" HeaderStyle-CssClass="column-left-align"
                 ItemStyle-Width="80px" DataFormatString="{0:yyyy-MM-dd}" ItemStyle-CssClass="column-left-align" />
             <asp:BoundField DataField="Topic" HeaderText="Topic" HeaderStyle-CssClass="column-left-align"
                 ItemStyle-CssClass="column-left-align" />
