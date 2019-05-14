@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("The Lindy Circle")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Attendance and finance tracking application")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("LindyCircle")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright © 2019 - Michael A Pipkin")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
