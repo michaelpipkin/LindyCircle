@@ -13,6 +13,7 @@ namespace LindyCircle
         public static DataTable GetFinancialData(DateTime? startDate, DateTime? endDate) {
             var dt = new DataTable();
             dt.Columns.Add("PreviousPracticeDate", typeof(DateTime));
+            dt.Columns.Add("PracticeID", typeof(int));
             dt.Columns.Add("PracticeDate", typeof(DateTime));
             dt.Columns.Add("RentalCost", typeof(decimal));
             dt.Columns.Add("AdmissionRevenue", typeof(decimal));
@@ -32,7 +33,7 @@ namespace LindyCircle
                             orderby t.PracticeDate ascending
                             select t;
                 foreach (var row in query) {
-                    dt.Rows.Add(null, row.PracticeDate, row.PracticeCost,
+                    dt.Rows.Add(null, row.PracticeID, row.PracticeDate, row.PracticeCost,
                         row.Attendances.Sum(t => t.PaymentAmount), row.MiscExpense,
                         row.MiscRevenue, 0, 0M, 0M, 0M);
                 }

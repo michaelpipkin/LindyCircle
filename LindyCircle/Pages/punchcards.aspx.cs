@@ -68,5 +68,20 @@ namespace LindyCircle.Pages
                 lblUnusedPunches.Text = db.Members.Single(t => t.MemberID == memberID).RemainingPunches.ToString();
             }
         }
+
+        protected void gvPunchCards_DataBound(object sender, EventArgs e) {
+            if (gvPunchCards.Rows.Count > 0) {
+                var punchCardCount = 0;
+                var punchCardTotal = 0M;
+                foreach (GridViewRow row in gvPunchCards.Rows) {
+                    if (row.RowType == DataControlRowType.DataRow) {
+                        punchCardCount++;
+                        punchCardTotal += decimal.Parse(row.Cells[2].Text);
+                    }
+                }
+                gvPunchCards.FooterRow.Cells[1].Text = "Total: " + punchCardCount.ToString();
+                gvPunchCards.FooterRow.Cells[2].Text = punchCardTotal.ToString("#,##0.00");
+            }
+        }
     }
 }

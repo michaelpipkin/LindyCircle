@@ -12,6 +12,7 @@ namespace LindyCircle
         public static DataTable GetPracticeAttendees(int practiceID) {
             var dt = new DataTable();
             dt.Columns.Add("AttendanceID", typeof(int));
+            dt.Columns.Add("MemberID", typeof(int));
             dt.Columns.Add("Member", typeof(string));
             dt.Columns.Add("PaymentType", typeof(int));
             dt.Columns.Add("PaymentTypeText", typeof(string));
@@ -22,7 +23,7 @@ namespace LindyCircle
                             orderby t.Member.FirstName, t.Member.LastName
                             select t;
                 foreach (var row in query)
-                    dt.Rows.Add(row.AttendanceID, row.Member.FirstLastName, row.PaymentType, 
+                    dt.Rows.Add(row.AttendanceID, row.MemberID, row.Member.FirstLastName, row.PaymentType, 
                         row.PaymentTypeText, row.PaymentAmount);
             }
             return dt;

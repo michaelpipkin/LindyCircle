@@ -2,11 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <style type="text/css">
-        .grid-column-right {
-            width: 75px;
-            text-align: right;
-            padding-right: 2px;
-        }
         tr td a {
             color: black;
         }
@@ -44,7 +39,8 @@
     <asp:Label ID="lblMessage" runat="server" Text="" CssClass="warning"></asp:Label>
     <br />
     <asp:GridView ID="gvPractices" runat="server" DataSourceID="odsPractices" AllowSorting="True"
-        AutoGenerateColumns="False" DataKeyNames="PracticeID" ShowFooter="True" OnDataBound="gvPractices_DataBound" OnRowDeleting="gvPractices_RowDeleting">
+        AutoGenerateColumns="False" DataKeyNames="PracticeID" ShowFooter="True" OnDataBound="gvPractices_DataBound"
+        OnRowDeleting="gvPractices_RowDeleting">
         <AlternatingRowStyle BackColor="#CCCCCC" />
         <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
         <Columns>
@@ -52,7 +48,7 @@
             <asp:TemplateField HeaderText="Number" ItemStyle-Width="50px" SortExpression="PracticeNumber" FooterText="Totals"
                 ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align">
                 <ItemTemplate>
-                    <a href="practice/<%# Eval("PracticeID") %>">
+                    <a href="/practice/<%# Eval("PracticeID") %>">
                         <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("PracticeNumber") %>'></asp:Label></a>
                 </ItemTemplate>
             </asp:TemplateField>
@@ -60,16 +56,21 @@
                 ItemStyle-Width="80px" DataFormatString="{0:yyyy-MM-dd}" ItemStyle-CssClass="column-left-align" />
             <asp:BoundField DataField="Topic" HeaderText="Topic" HeaderStyle-CssClass="column-left-align"
                 ItemStyle-CssClass="column-left-align" />
-            <asp:BoundField DataField="PracticeCost" HeaderText="Rental cost" ItemStyle-CssClass="grid-column-right"
-                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}" />
-            <asp:BoundField DataField="Revenue" HeaderText="Admission revenue" ItemStyle-CssClass="grid-column-right"
-                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}" />
-            <asp:BoundField DataField="MiscExpense" HeaderText="Misc expenses" ItemStyle-CssClass="grid-column-right"
-                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}" />
-            <asp:BoundField DataField="MiscRevenue" HeaderText="Misc revenue" ItemStyle-CssClass="grid-column-right"
-                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}" />
-            <asp:BoundField DataField="Attendees" HeaderText="Attendees" SortExpression="Attendees" ItemStyle-CssClass="grid-column-right"
-                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" />
+            <asp:BoundField DataField="PracticeCost" HeaderText="Rental cost" ItemStyle-CssClass="column-right-align"
+                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}"
+                HeaderStyle-Width="75px" />
+            <asp:BoundField DataField="Revenue" HeaderText="Admission revenue" ItemStyle-CssClass="column-right-align"
+                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}"
+                HeaderStyle-Width="75px" />
+            <asp:BoundField DataField="MiscExpense" HeaderText="Misc expenses" ItemStyle-CssClass="column-right-align"
+                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}"
+                HeaderStyle-Width="75px" />
+            <asp:BoundField DataField="MiscRevenue" HeaderText="Misc revenue" ItemStyle-CssClass="column-right-align"
+                FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}"
+                HeaderStyle-Width="75px" />
+            <asp:BoundField DataField="Attendees" HeaderText="Attendees" SortExpression="Attendees"
+                ItemStyle-CssClass="column-right-align" FooterStyle-HorizontalAlign="Right"
+                HeaderStyle-CssClass="column-right-align" HeaderStyle-Width="75px" />
             <asp:CommandField ButtonType="Link" ShowDeleteButton="True" ItemStyle-Width="50px" />
         </Columns>
     </asp:GridView>

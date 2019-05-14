@@ -1,23 +1,76 @@
 ﻿<%@ Page Title="Member History" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="member.aspx.cs" Inherits="LindyCircle.Pages.member" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ObjectDataSource ID="odsMemberHistory" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetMemberHistory" TypeName="LindyCircle.MemberDB">
+    <style type="text/css">
+        tr td a {
+            color: black;
+        }
+
+        #gvHistory {
+            float: left;
+        }
+
+        #gvPunchCards {
+            float: left;
+            margin-left: 10px;
+        }
+
+        #panClear {
+            clear: both;
+        }
+    </style>
+    <asp:ObjectDataSource ID="odsMemberHistory" runat="server" SelectMethod="GetMemberHistory" TypeName="LindyCircle.MemberDB">
+        <SelectParameters>
+            <asp:RouteParameter Name="memberID" RouteKey="memberID" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="odsPunchCards" runat="server"
+        SelectMethod="GetPunchCardPurchasesByMemberID" TypeName="LindyCircle.PunchCardDB">
         <SelectParameters>
             <asp:RouteParameter Name="memberID" RouteKey="memberID" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
     <br />
     Member:<asp:Label ID="lblMemberName" runat="server" Text=""></asp:Label>
-    <br /><br />
-    <asp:GridView ID="gvHistory" runat="server" DataSourceID="odsMemberHistory" AutoGenerateColumns="false" ShowFooter="true" OnDataBound="gvHistory_DataBound">
-        <AlternatingRowStyle BackColor="#CCCCCC" />
-        <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
-        <Columns>
-            <asp:BoundField DataField="PracticeDate" HeaderText="Practice Date" 
-                DataFormatString="{0:yyyy-MM-dd}" FooterText="Total Attendance" HeaderStyle-Width="130px" />
-            <asp:BoundField DataField="PaymentType" HeaderText="Type" HeaderStyle-Width="80px" />
-            <asp:BoundField DataField="PaymentAmount" HeaderText="Amount" HeaderStyle-CssClass="column-right-align"
-                ItemStyle-CssClass="column-right-align" FooterStyle-CssClass="column-right-align" HeaderStyle-Width="80px" />
-        </Columns>
-    </asp:GridView>
+    <br />
+    Unused punches:<asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
+    <br />
+    <br />
+    <asp:Panel ID="panGrids" runat="server" ClientIDMode="Static">
+        <asp:GridView ID="gvHistory" runat="server" DataSourceID="odsMemberHistory" AutoGenerateColumns="false"
+            ShowFooter="true" OnDataBound="gvHistory_DataBound" ClientIDMode="Static">
+            <AlternatingRowStyle BackColor="#CCCCCC" />
+            <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
+            <Columns>
+                <asp:TemplateField HeaderText="Practice Date" HeaderStyle-Width="130px" SortExpression="PracticeDate"
+                    FooterText="Total Attendance"
+                    ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align">
+                    <ItemTemplate>
+                        <a href="/practice/<%# Eval("PracticeID") %>">
+                            <asp:Label ID="lblPracticeDate" runat="server"
+                                Text='<%# Eval("PracticeDate", "{0:yyyy-MM-dd}") %>'></asp:Label></a>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="PaymentType" HeaderText="Type" HeaderStyle-Width="80px" />
+                <asp:BoundField DataField="PaymentAmount" HeaderText="Amount" HeaderStyle-CssClass="column-right-align"
+                    ItemStyle-CssClass="column-right-align" FooterStyle-CssClass="column-right-align" HeaderStyle-Width="80px" />
+            </Columns>
+        </asp:GridView>
+        <asp:GridView ID="gvPunchCards" runat="server" DataSourceID="odsPunchCards" AutoGenerateColumns="False"
+            DataKeyNames="PunchCardID" EmptyDataText="This member has not purchased any punch cards." ClientIDMode="Static" 
+            ShowFooter="true" OnDataBound="gvPunchCards_DataBound">
+            <AlternatingRowStyle BackColor="#CCCCCC" />
+            <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
+            <Columns>
+                <asp:BoundField DataField="PunchCardID" HeaderText="PunchCardID" Visible="false" />
+                <asp:BoundField DataField="PurchaseDate" HeaderText="Punch Card Purchase Date" HeaderStyle-Width="120px"
+                    DataFormatString="{0:yyyy-MM-dd}" FooterText="Total">
+                </asp:BoundField>
+                <asp:BoundField DataField="PurchaseAmount" HeaderText="Amount" HeaderStyle-Width="75px"
+                    DataFormatString="{0:n2}">
+                </asp:BoundField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panClear" runat="server" ClientIDMode="Static"></asp:Panel>
 </asp:Content>

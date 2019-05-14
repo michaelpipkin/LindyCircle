@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="Attendance" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="attendance.aspx.cs" Inherits="LindyCircle.Pages.attendance" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style type="text/css">
+        tr td a {
+            color: black;
+        }
+    </style>
     <asp:ObjectDataSource ID="odsMembers" runat="server" SelectMethod="GetMembersNotInPractice" TypeName="LindyCircle.AttendanceDB">
         <SelectParameters>
             <asp:ControlParameter ControlID="txtPracticeID" Name="practiceID" PropertyName="Text" Type="Int32" />
@@ -45,7 +50,7 @@
                 <br />
                 Practice Number:<asp:TextBox ID="txtNewPracticeNumber" runat="server" CssClass="textbox" Width="30px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="valNewPracticeNumberRequired" runat="server" ErrorMessage="Practice Number is required."
-                    CssClass="warning" Display="Dynamic" ControlToValidate="txtNewPracticeNumber" 
+                    CssClass="warning" Display="Dynamic" ControlToValidate="txtNewPracticeNumber"
                     ValidationGroup="vgNewPractice">*</asp:RequiredFieldValidator>
                 <asp:CompareValidator ID="valNewPracticeNumberType" runat="server" ErrorMessage="Practice Number must be a valid integer."
                     CssClass="warning" Display="Dynamic" ControlToValidate="txtNewPracticeNumber" ValidationGroup="vgNewPractice"
@@ -72,9 +77,9 @@
                     ControlToValidate="txtNewMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgNewPractice">*</asp:CompareValidator>
                 <br />
-                <asp:Button ID="btnAddPractice" runat="server" Text="Add Practice" OnClick="btnAddPractice_Click" 
+                <asp:Button ID="btnAddPractice" runat="server" Text="Add Practice" OnClick="btnAddPractice_Click"
                     ValidationGroup="vgNewPractice" />
-                <asp:Button ID="btnCancelAddPractice" runat="server" Text="Cancel" CssClass="textbox" 
+                <asp:Button ID="btnCancelAddPractice" runat="server" Text="Cancel" CssClass="textbox"
                     OnClick="btnCancelAddPractice_Click" />
                 <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="warning" ValidationGroup="vgNewPractice" />
             </asp:Panel>
@@ -98,12 +103,17 @@
                 <asp:ValidationSummary ID="ValidationSummary3" runat="server" CssClass="warning" ValidationGroup="vgAddMember" />
                 <br />
                 <br />
-                <asp:GridView ID="gvAttendance" runat="server" DataSourceID="odsAttendance" AutoGenerateColumns="false" 
+                <asp:GridView ID="gvAttendance" runat="server" DataSourceID="odsAttendance" AutoGenerateColumns="false"
                     DataKeyNames="AttendanceID">
                     <AlternatingRowStyle BackColor="#CCCCCC" />
                     <Columns>
                         <asp:BoundField DataField="AttendanceID" HeaderText="ID" Visible="false" />
-                        <asp:BoundField DataField="Member" HeaderText="Name" ItemStyle-Width="150px" />
+                        <asp:TemplateField HeaderText="Name" ItemStyle-Width="150px" SortExpression="MemberName">
+                            <ItemTemplate>
+                                <a href="/member/<%# Eval("MemberID") %>">
+                                    <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("Member") %>'></asp:Label></a>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="PaymentType" Visible="false" />
                         <asp:BoundField DataField="PaymentTypeText" HeaderText="Payment Type" ItemStyle-Width="100px" />
                         <asp:BoundField DataField="PaymentAmount" HeaderText="Amount" ItemStyle-Width="75px" />
@@ -118,7 +128,7 @@
                 <br />
                 Practice Number:<asp:TextBox ID="txtPracticeNumber" runat="server" CssClass="textbox" Width="30px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="valPracticeNumberRequired" runat="server" ErrorMessage="Practice Number is required."
-                    CssClass="warning" Display="Dynamic" ControlToValidate="txtPracticeNumber" 
+                    CssClass="warning" Display="Dynamic" ControlToValidate="txtPracticeNumber"
                     ValidationGroup="vgPractice">*</asp:RequiredFieldValidator>
                 <asp:CompareValidator ID="valPracticeNumberType" runat="server" ErrorMessage="Practice Number must be a valid integer."
                     CssClass="warning" Display="Dynamic" ControlToValidate="txtPracticeNumber" ValidationGroup="vgPractice"
@@ -145,7 +155,7 @@
                     ControlToValidate="txtMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
                 <br />
-                <asp:Button ID="btnSaveDetails" runat="server" Text="Save practice details" 
+                <asp:Button ID="btnSaveDetails" runat="server" Text="Save practice details"
                     OnClick="btnSaveDetails_Click" ValidationGroup="vgPractice" />
                 <br />
                 <asp:ValidationSummary ID="ValidationSummary4" runat="server" CssClass="warning" ValidationGroup="vgPractice" />

@@ -12,10 +12,11 @@
             }
         }
     </script>
-    <asp:ObjectDataSource ID="odsMembers" runat="server" OldValuesParameterFormatString="original_{0}"
+    <asp:ObjectDataSource ID="odsMembers" runat="server"
         SelectMethod="GetMemberList" TypeName="LindyCircle.MemberDB"></asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="odsPunchCards" runat="server" OldValuesParameterFormatString="original_{0}"
-        SelectMethod="GetPunchCardPurchasesByMemberID" TypeName="LindyCircle.PunchCardDB" DeleteMethod="DeletePunchCard">
+    <asp:ObjectDataSource ID="odsPunchCards" runat="server"
+        SelectMethod="GetPunchCardPurchasesByMemberID" TypeName="LindyCircle.PunchCardDB" 
+        DeleteMethod="DeletePunchCard">
         <DeleteParameters>
             <asp:Parameter Name="PunchCardID" Type="Int32" />
         </DeleteParameters>
@@ -58,12 +59,14 @@
             <asp:Label ID="lblWarning" runat="server" Text="" CssClass="warning" ClientIDMode="Static"></asp:Label>
             <br />
             <asp:GridView ID="gvPunchCards" runat="server" DataSourceID="odsPunchCards" AutoGenerateColumns="False"
-                DataKeyNames="PunchCardID" EmptyDataText="This member has not purchased any punch cards.">
+                DataKeyNames="PunchCardID" EmptyDataText="This member has not purchased any punch cards." ShowFooter="true" 
+                OnDataBound="gvPunchCards_DataBound">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
+                <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
                 <Columns>
                     <asp:BoundField DataField="PunchCardID" HeaderText="PunchCardID" Visible="false" />
                     <asp:BoundField DataField="PurchaseDate" HeaderText="Purchase Date" ItemStyle-Width="85px" 
-                        DataFormatString="{0:yyyy-MM-dd}">
+                        DataFormatString="{0:yyyy-MM-dd}" FooterText="Total">
                         <ItemStyle Width="85px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="PurchaseAmount" HeaderText="Amount" ItemStyle-Width="75px" 

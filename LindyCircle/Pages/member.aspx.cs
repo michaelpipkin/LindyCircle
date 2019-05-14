@@ -13,7 +13,10 @@ namespace LindyCircle.Pages
                 if (int.TryParse(Page.RouteData.Values["memberID"].ToString(), out memberID)) {
                     using (var db = new LindyCircleContext()) {
                         var member = db.Members.SingleOrDefault(t => t.MemberID == memberID);
-                        if (member != null) lblMemberName.Text = member.FirstLastName;
+                        if (member != null) {
+                            lblMemberName.Text = member.FirstLastName;
+                            lblUnusedPunches.Text = member.RemainingPunches.ToString();
+                        }
                         else Response.Redirect("~/members", true);
                     }
                 }
@@ -32,6 +35,21 @@ namespace LindyCircle.Pages
             }
             gvHistory.FooterRow.Cells[1].Text = practiceCount.ToString();
             gvHistory.FooterRow.Cells[2].Text = totalPaid.ToString("#,##0.00");
+        }
+
+        protected void gvPunchCards_DataBound(object sender, EventArgs e) {
+            if (gvPunchCards.Rows.Count > 0) {
+                var punchCardCount = 0;
+                var punchCardTotal = 0M;
+                foreach (GridViewRow row in gvPunchCards.Rows) {
+                    if (row.RowType == DataControlRowType.DataRow) {
+                        punchCardCount++;
+                        punchCardTotal += decimal.Parse(row.Cells[2].Text);
+                    }
+                }
+                gvPunchCards.FooterRow.Cells[1].Text = "Total: " + punchCardCount.ToString();
+                gvPunchCards.FooterRow.Cells[2].Text = punchCardTotal.ToString("#,##0.00");
+            }
         }
     }
 }

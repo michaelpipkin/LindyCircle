@@ -45,6 +45,7 @@ namespace LindyCircle
         [DataObjectMethod(DataObjectMethodType.Select)]
         public static DataTable GetMemberHistory(int memberID) {
             var dt = new DataTable();
+            dt.Columns.Add("PracticeID", typeof(int));
             dt.Columns.Add("PracticeDate", typeof(DateTime));
             dt.Columns.Add("PaymentType", typeof(string));
             dt.Columns.Add("PaymentAmount", typeof(decimal));
@@ -54,7 +55,7 @@ namespace LindyCircle
                             orderby t.Practice.PracticeDate
                             select t;
                 foreach (var row in query)
-                    dt.Rows.Add(row.Practice.PracticeDate, row.PaymentTypeText, row.PaymentAmount);
+                    dt.Rows.Add(row.PracticeID, row.Practice.PracticeDate, row.PaymentTypeText, row.PaymentAmount);
             }
             return dt;
         }

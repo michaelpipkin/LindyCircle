@@ -49,7 +49,7 @@
                     <asp:BoundField DataField="MemberID" HeaderText="MemberID" Visible="false" />
                     <asp:TemplateField HeaderText="Name" ItemStyle-Width="150px" SortExpression="MemberName">
                         <ItemTemplate>
-                            <a href="member/<%# Eval("MemberID") %>">
+                            <a href="/member/<%# Eval("MemberID") %>">
                                 <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("MemberName") %>'></asp:Label></a>
                         </ItemTemplate>
                     </asp:TemplateField>

@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="Finances" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="finances.aspx.cs" Inherits="LindyCircle.Pages.finances" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <style type="text/css">
+        tr td a {
+            color: black;
+        }
+    </style>
     <asp:ObjectDataSource ID="odsFinances" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="GetFinancialData" TypeName="LindyCircle.FinanceDB">
         <SelectParameters>
             <asp:ControlParameter ControlID="txtStartDate" Name="startDate" PropertyName="Text" Type="DateTime" />
@@ -30,8 +35,13 @@
         <AlternatingRowStyle BackColor="#CCCCCC" />
         <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
         <Columns>
-            <asp:BoundField DataField="PracticeDate" HeaderText="Practice Date" DataFormatString="{0:yyyy-MM-dd}" HeaderStyle-Width="80px" 
-                FooterText="Totals" />
+            <asp:TemplateField HeaderText="Practice Date" HeaderStyle-Width="80px" FooterText="Totals"
+                ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align">
+                <ItemTemplate>
+                    <a href="/practice/<%# Eval("PracticeID") %>">
+                        <asp:Label ID="lblPracticeDate" runat="server" Text='<%# Eval("PracticeDate", "{0:yyyy-MM-dd}") %>'></asp:Label></a>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="RentalCost" HeaderText="Rental Cost" DataFormatString="{0:#,##0.00}" HeaderStyle-Width="80px" 
                 HeaderStyle-CssClass="column-right-align" ItemStyle-CssClass="column-right-align" FooterStyle-CssClass="column-right-align" />
             <asp:BoundField DataField="AdmissionRevenue" HeaderText="Admissions" DataFormatString="{0:#,##0.00}" HeaderStyle-Width="80px" 
