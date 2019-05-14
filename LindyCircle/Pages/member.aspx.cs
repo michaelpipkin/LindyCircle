@@ -8,9 +8,16 @@ namespace LindyCircle.Pages
     public partial class member : Page
     {
         protected void Page_Load(object sender, EventArgs e) {
-            using (var db = new LindyCircleContext()) {
-                var memberID = int.Parse(Page.RouteData.Values["memberID"].ToString());
-                lblMemberName.Text = db.Members.Single(t => t.MemberID == memberID).FirstLastName;
+            if (!IsPostBack) {
+                int memberID;
+                if (int.TryParse(Page.RouteData.Values["memberID"].ToString(), out memberID)) {
+                    using (var db = new LindyCircleContext()) {
+                        var member = db.Members.SingleOrDefault(t => t.MemberID == memberID);
+                        if (member != null) lblMemberName.Text = member.FirstLastName;
+                        else Response.Redirect("~/members", true);
+                    }
+                }
+                else Response.Redirect("~/members", true);
             }
         }
 

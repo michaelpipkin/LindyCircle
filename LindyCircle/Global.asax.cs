@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace LindyCircle
 {
@@ -30,6 +26,7 @@ namespace LindyCircle
             routes.MapPageRoute("HistoryRoute", "history", "~/Pages/history.aspx");
             routes.MapPageRoute("FinancesRoute", "finances", "~/Pages/finances.aspx");
             routes.MapPageRoute("MemberRoute", "member/{memberID}", "~/Pages/member.aspx");
+            routes.MapPageRoute("PracticeRoute", "practice/{practiceID}", "~/Pages/practice.aspx");
         }
     }
 }

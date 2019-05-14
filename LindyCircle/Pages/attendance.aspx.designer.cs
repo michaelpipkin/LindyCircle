@@ -103,6 +103,42 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.Label lblNewPractice;
         
         /// <summary>
+        /// txtNewPracticeNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNewPracticeNumber;
+        
+        /// <summary>
+        /// valNewPracticeNumberRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valNewPracticeNumberRequired;
+        
+        /// <summary>
+        /// valNewPracticeNumberType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator valNewPracticeNumberType;
+        
+        /// <summary>
+        /// valNewPracticeNumberUnique control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator valNewPracticeNumberUnique;
+        
+        /// <summary>
         /// txtNewTopic control.
         /// </summary>
         /// <remarks>
@@ -166,22 +202,22 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.CompareValidator valNewMiscRevenue;
         
         /// <summary>
-        /// btnYes control.
+        /// btnAddPractice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnYes;
+        protected global::System.Web.UI.WebControls.Button btnAddPractice;
         
         /// <summary>
-        /// btnNo control.
+        /// btnCancelAddPractice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNo;
+        protected global::System.Web.UI.WebControls.Button btnCancelAddPractice;
         
         /// <summary>
         /// ValidationSummary2 control.
@@ -247,13 +283,13 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.CompareValidator valPaymentAmount;
         
         /// <summary>
-        /// btnAddToPractice control.
+        /// btnCheckIn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddToPractice;
+        protected global::System.Web.UI.WebControls.Button btnCheckIn;
         
         /// <summary>
         /// ValidationSummary3 control.
@@ -272,6 +308,42 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAttendance;
+        
+        /// <summary>
+        /// txtPracticeNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPracticeNumber;
+        
+        /// <summary>
+        /// valPracticeNumberRequired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valPracticeNumberRequired;
+        
+        /// <summary>
+        /// valPracticeNumberType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator valPracticeNumberType;
+        
+        /// <summary>
+        /// valPracticeNumberUnique control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator valPracticeNumberUnique;
         
         /// <summary>
         /// txtTopic control.
@@ -337,13 +409,13 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.CompareValidator valMiscRevenue;
         
         /// <summary>
-        /// btnSave control.
+        /// btnSaveDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
+        protected global::System.Web.UI.WebControls.Button btnSaveDetails;
         
         /// <summary>
         /// ValidationSummary4 control.

@@ -206,6 +206,7 @@
     <Content Include="Pages\history.aspx" />
     <Content Include="Pages\member.aspx" />
     <Content Include="Pages\members.aspx" />
+    <Content Include="Pages\practice.aspx" />
     <Content Include="Pages\practices.aspx" />
     <Content Include="Pages\punchcards.aspx" />
     <EntityDeploy Include="LindyCircleModel.edmx">
@@ -368,6 +369,13 @@
     </Compile>
     <Compile Include="Pages\members.aspx.designer.cs">
       <DependentUpon>members.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\practice.aspx.cs">
+      <DependentUpon>practice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\practice.aspx.designer.cs">
+      <DependentUpon>practice.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\practices.aspx.cs">
       <DependentUpon>practices.aspx</DependentUpon>

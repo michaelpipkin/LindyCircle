@@ -7,6 +7,9 @@
             text-align: right;
             padding-right: 2px;
         }
+        tr td a {
+            color: black;
+        }
     </style>
     <asp:ObjectDataSource ID="odsPractices" runat="server"
         SelectMethod="GetPractices" TypeName="LindyCircle.PracticeDB" DeleteMethod="DeletePractice">
@@ -16,7 +19,7 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="txtStartDate" Name="startDate" PropertyName="Text" Type="DateTime" />
             <asp:ControlParameter ControlID="txtEndDate" Name="endDate" PropertyName="Text" Type="DateTime" />
-            <asp:ControlParameter ControlID="txtTopic" Name="topic" PropertyName="Text" Type="String" 
+            <asp:ControlParameter ControlID="txtTopic" Name="topic" PropertyName="Text" Type="String"
                 ConvertEmptyStringToNull="False" />
         </SelectParameters>
     </asp:ObjectDataSource>
@@ -46,8 +49,15 @@
         <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
         <Columns>
             <asp:BoundField DataField="PracticeID" HeaderText="PracticeID" Visible="false" />
-            <asp:BoundField DataField="PracticeNumber" HeaderText="Number" ItemStyle-Width="50px" FooterText="Totals"
-                ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align" />
+            <asp:TemplateField HeaderText="Number" ItemStyle-Width="50px" SortExpression="MemberName" FooterText="Totals"
+                ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align">
+                <ItemTemplate>
+                    <a href="practice/<%# Eval("PracticeID") %>">
+                        <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("PracticeNumber") %>'></asp:Label></a>
+                </ItemTemplate>
+            </asp:TemplateField>
+<%--            <asp:BoundField DataField="PracticeNumber" HeaderText="Number" ItemStyle-Width="50px" FooterText="Totals"
+                ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align" />--%>
             <asp:BoundField DataField="PracticeDate" HeaderText="Date" SortExpression="PracticeDate" HeaderStyle-CssClass="column-left-align"
                 ItemStyle-Width="80px" DataFormatString="{0:yyyy-MM-dd}" ItemStyle-CssClass="column-left-align" />
             <asp:BoundField DataField="Topic" HeaderText="Topic" HeaderStyle-CssClass="column-left-align"

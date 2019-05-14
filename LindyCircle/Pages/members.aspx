@@ -12,7 +12,7 @@
         }
     </script>
     <style type="text/css">
-        a {
+        tr td a {
             color: black;
         }
     </style>
@@ -53,9 +53,6 @@
                                 <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("MemberName") %>'></asp:Label></a>
                         </ItemTemplate>
                     </asp:TemplateField>
-<%--                    <asp:BoundField DataField="MemberName" HeaderText="Name" SortExpression="MemberName" ItemStyle-Width="150px">
-                        <ItemStyle Width="150px" />
-                    </asp:BoundField>--%>
                     <asp:BoundField DataField="Attended" HeaderText="Attended" SortExpression="Attended" ItemStyle-Width="65px">
                         <ItemStyle Width="65px" />
                     </asp:BoundField>
