@@ -103,6 +103,15 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.Label lblNewPractice;
         
         /// <summary>
+        /// txtNewTopic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNewTopic;
+        
+        /// <summary>
         /// txtNewRentalCost control.
         /// </summary>
         /// <remarks>
@@ -263,6 +272,15 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAttendance;
+        
+        /// <summary>
+        /// txtTopic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTopic;
         
         /// <summary>
         /// txtRentalCost control.

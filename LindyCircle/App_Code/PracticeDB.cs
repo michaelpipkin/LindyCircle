@@ -10,7 +10,7 @@ namespace LindyCircle
     public class PracticeDB
     {
         [DataObjectMethod(DataObjectMethodType.Select)]
-        public static DataTable GetPractices(DateTime? startDate, DateTime? endDate) {
+        public static DataTable GetPractices(DateTime? startDate, DateTime? endDate, string topic) {
             var dt = new DataTable();
             dt.Columns.Add("PracticeID", typeof(int));
             dt.Columns.Add("PracticeNumber", typeof(int));
@@ -20,18 +20,21 @@ namespace LindyCircle
             dt.Columns.Add("MiscExpense", typeof(decimal));
             dt.Columns.Add("MiscRevenue", typeof(decimal));
             dt.Columns.Add("Attendees", typeof(int));
+            dt.Columns.Add("Topic", typeof(string));
             using (var db = new LindyCircleContext()) {
                 if (startDate == null)
                     startDate = db.Practices.Min(t => t.PracticeDate);
                 if (endDate == null)
                     endDate = db.Practices.Max(t => t.PracticeDate);
                 var query = from t in db.Practices
-                            where t.PracticeDate >= startDate && t.PracticeDate <= endDate
+                            where t.PracticeDate >= startDate && t.PracticeDate <= endDate &&
+                                t.PracticeTopic.Contains(topic)
                             orderby t.PracticeDate descending
                             select t;
                 foreach (var row in query)
                     dt.Rows.Add(row.PracticeID, row.PracticeNumber, row.PracticeDate, row.PracticeCost,
-                        row.Attendances.Sum(t => t.PaymentAmount), row.MiscExpense, row.MiscRevenue, row.Attendances.Count);
+                        row.Attendances.Sum(t => t.PaymentAmount), row.MiscExpense, row.MiscRevenue, 
+                        row.Attendances.Count, row.PracticeTopic);
             }
             return dt;
         }
@@ -45,7 +48,7 @@ namespace LindyCircle
         [DataObjectMethod(DataObjectMethodType.Delete)]
         public static void DeletePractice(int practiceID) {
             using (var db = new LindyCircleContext()) {
-                var practice = db.Practices.FirstOrDefault(t => t.PracticeID == practiceID);
+                var practice = db.Practices.SingleOrDefault(t => t.PracticeID == practiceID);
                 if (practice != null) {
                     db.Practices.Remove(practice);
                     db.SaveChanges();

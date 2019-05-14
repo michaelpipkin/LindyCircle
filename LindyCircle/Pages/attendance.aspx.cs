@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -38,9 +36,10 @@ namespace LindyCircle.Pages
 
         protected void GetPracticeID(DateTime practiceDate) {
             using (var db = new LindyCircleContext()) {
-                var practice = db.Practices.FirstOrDefault(t => t.PracticeDate == practiceDate);
+                var practice = db.Practices.SingleOrDefault(t => t.PracticeDate == practiceDate);
                 if (practice != null) {
                     txtPracticeID.Text = practice.PracticeID.ToString();
+                    txtTopic.Text = practice.PracticeTopic;
                     txtRentalCost.Text = practice.PracticeCost.ToString("0.00");
                     txtMiscExpense.Text = practice.MiscExpense.ToString("0.00");
                     txtMiscRevenue.Text = practice.MiscRevenue.ToString("0.00");
@@ -49,8 +48,11 @@ namespace LindyCircle.Pages
                 }
                 else {
                     panPracticeDetails.Visible = false;
-                    lblNewPractice.Text = "Would you like to add a new practice dated " + calPracticeDate.SelectedDate.ToShortDateString() + "?";
-                    txtNewRentalCost.Text = db.Defaults.Single(t => t.DefaultName.Equals("Rental Cost")).DefaultValue.ToString("0.00");
+                    lblNewPractice.Text = "Would you like to add a new practice dated " + 
+                        calPracticeDate.SelectedDate.ToShortDateString() + "?";
+                    txtNewTopic.Text = string.Empty;
+                    txtNewRentalCost.Text = db.Defaults.Single(t => t.DefaultName.Equals("Rental Cost")).
+                        DefaultValue.ToString("0.00");
                     txtNewMiscExpense.Text = "0.00";
                     txtNewMiscRevenue.Text = "0.00";
                     panNewPractice.Visible = true;
@@ -68,6 +70,7 @@ namespace LindyCircle.Pages
                 var newPractice = new Practice();
                 newPractice.PracticeNumber = nextPracticeNumber;
                 newPractice.PracticeDate = calPracticeDate.SelectedDate;
+                newPractice.PracticeTopic = txtNewTopic.Text;
                 if (string.IsNullOrEmpty(txtNewRentalCost.Text)) newPractice.PracticeCost = 0M;
                 else newPractice.PracticeCost = decimal.Parse(txtNewRentalCost.Text);
                 if (string.IsNullOrEmpty(txtNewMiscExpense.Text)) newPractice.MiscExpense = 0M;
@@ -78,6 +81,7 @@ namespace LindyCircle.Pages
                 db.SaveChanges();
                 txtPracticeID.Text = db.Practices.Max(t => t.PracticeID).ToString();
                 panNewPractice.Visible = false;
+                txtTopic.Text = newPractice.PracticeTopic;
                 txtRentalCost.Text = newPractice.PracticeCost.ToString("#,##0.00");
                 txtMiscExpense.Text = newPractice.MiscExpense.ToString("#,##0.00");
                 txtMiscRevenue.Text = newPractice.MiscRevenue.ToString("#,##0.00");
@@ -101,7 +105,7 @@ namespace LindyCircle.Pages
         protected void SetDefaultPaymentType() {
             var selectedMemberID = int.Parse(ddlMembers.SelectedValue);
             using (var db = new LindyCircleContext()) {
-                var unusedPunches = db.Members.First(t => t.MemberID == selectedMemberID).RemainingPunches;
+                var unusedPunches = db.Members.Single(t => t.MemberID == selectedMemberID).RemainingPunches;
                 lblUnusedPunches.Text = unusedPunches.ToString();
                 if (unusedPunches >= 1)
                     ddlPaymentTypes.SelectedIndex = 2;
@@ -113,7 +117,8 @@ namespace LindyCircle.Pages
         protected void SetDefaultPaymentAmount() {
             if (ddlPaymentTypes.SelectedValue.Equals("1")) {
                 using (var db = new LindyCircleContext())
-                    txtPaymentAmount.Text = db.Defaults.Single(t => t.DefaultName.Equals("Door price")).DefaultValue.ToString("0.00");
+                    txtPaymentAmount.Text = db.Defaults.Single(t => t.DefaultName.Equals("Door price")).
+                        DefaultValue.ToString("0.00");
             }
             else txtPaymentAmount.Text = "0.00";
         }
@@ -136,7 +141,8 @@ namespace LindyCircle.Pages
         protected void btnSave_Click(object sender, EventArgs e) {
             using (var db = new LindyCircleContext()) {
                 var practiceID = int.Parse(txtPracticeID.Text);
-                var practice = db.Practices.First(t => t.PracticeID == practiceID);
+                var practice = db.Practices.Single(t => t.PracticeID == practiceID);
+                practice.PracticeTopic = txtTopic.Text;
                 if (string.IsNullOrEmpty(txtRentalCost.Text)) practice.PracticeCost = 0M;
                 else practice.PracticeCost = decimal.Parse(txtRentalCost.Text);
                 if (string.IsNullOrEmpty(txtMiscExpense.Text)) practice.MiscExpense = 0M;
@@ -151,7 +157,7 @@ namespace LindyCircle.Pages
         protected void btnRemove_Command(object sender, CommandEventArgs e) {
             var attendanceID = int.Parse(e.CommandArgument.ToString());
             using (var db = new LindyCircleContext()) {
-                var attendance = db.Attendances.FirstOrDefault(t => t.AttendanceID == attendanceID);
+                var attendance = db.Attendances.SingleOrDefault(t => t.AttendanceID == attendanceID);
                 if (attendance != null) {
                     db.Attendances.Remove(attendance);
                     db.SaveChanges();

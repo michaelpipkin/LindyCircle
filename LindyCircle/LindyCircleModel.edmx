@@ -42,6 +42,7 @@
           <Property Name="PracticeCost" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="MiscExpense" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="MiscRevenue" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PracticeTopic" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="PunchCards">
           <Key>
@@ -153,6 +154,7 @@
           <Property Name="PracticeCost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="MiscExpense" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="MiscRevenue" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PracticeTopic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Practices" FromRole="Practices" ToRole="Attendance" />
         </EntityType>
         <EntityType Name="PunchCard">
@@ -265,6 +267,7 @@
                 <ScalarProperty Name="PracticeCost" ColumnName="PracticeCost" />
                 <ScalarProperty Name="MiscExpense" ColumnName="MiscExpense" />
                 <ScalarProperty Name="MiscRevenue" ColumnName="MiscRevenue" />
+                <ScalarProperty Name="PracticeTopic" ColumnName="PracticeTopic" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

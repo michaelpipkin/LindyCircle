@@ -20,7 +20,7 @@
         ControlToValidate="txtEndDate" CssClass="warning" Display="Dynamic" Operator="GreaterThan" Type="Date"
         ValidationGroup="vgFilter" ControlToCompare="txtStartDate">*</asp:CompareValidator>
     <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="textbox" ValidationGroup="vgFilter" />
-    <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="textbox" CausesValidation="false" OnClick="btnReset_Click" />
+    <asp:Button ID="btnReset" runat="server" Text="Clear" CssClass="textbox" CausesValidation="false" OnClick="btnReset_Click" />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="warning" EnableClientScript="True" ValidationGroup="vgFilter" />
     <br />
     <br />

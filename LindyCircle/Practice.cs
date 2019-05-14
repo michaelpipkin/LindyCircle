@@ -17,6 +17,7 @@ namespace LindyCircle
         public decimal PracticeCost { get; set; }
         public decimal MiscExpense { get; set; }
         public decimal MiscRevenue { get; set; }
+        public string PracticeTopic { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attendance> Attendances { get; set; }

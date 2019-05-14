@@ -16,6 +16,8 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="txtStartDate" Name="startDate" PropertyName="Text" Type="DateTime" />
             <asp:ControlParameter ControlID="txtEndDate" Name="endDate" PropertyName="Text" Type="DateTime" />
+            <asp:ControlParameter ControlID="txtTopic" Name="topic" PropertyName="Text" Type="String" 
+                ConvertEmptyStringToNull="False" />
         </SelectParameters>
     </asp:ObjectDataSource>
     <br />
@@ -30,6 +32,8 @@
     <asp:CompareValidator ID="valCompareDates" runat="server" ErrorMessage="End Date must be later than Start Date."
         ControlToValidate="txtEndDate" CssClass="warning" Display="Dynamic" Operator="GreaterThan" Type="Date"
         ValidationGroup="vgFilter" ControlToCompare="txtStartDate">*</asp:CompareValidator>
+    <br />
+    Topic:<asp:TextBox ID="txtTopic" runat="server" Width="250px" CssClass="textbox"></asp:TextBox>
     <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="textbox" ValidationGroup="vgFilter" />
     <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="textbox" CausesValidation="false" OnClick="btnClear_Click" />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="warning" EnableClientScript="True" ValidationGroup="vgFilter" />
@@ -46,6 +50,8 @@
                 ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align" />
             <asp:BoundField DataField="PracticeDate" HeaderText="Date" SortExpression="PracticeDate" HeaderStyle-CssClass="column-left-align"
                 ItemStyle-Width="80px" DataFormatString="{0:yyyy-MM-dd}" ItemStyle-CssClass="column-left-align" />
+            <asp:BoundField DataField="Topic" HeaderText="Topic" HeaderStyle-CssClass="column-left-align"
+                ItemStyle-CssClass="column-left-align" />
             <asp:BoundField DataField="PracticeCost" HeaderText="Rental cost" ItemStyle-CssClass="grid-column-right"
                 FooterStyle-HorizontalAlign="Right" HeaderStyle-CssClass="column-right-align" DataFormatString="{0:#,##0.00}" />
             <asp:BoundField DataField="Revenue" HeaderText="Admission revenue" ItemStyle-CssClass="grid-column-right"

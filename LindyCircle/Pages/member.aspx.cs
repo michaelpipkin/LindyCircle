@@ -10,7 +10,7 @@ namespace LindyCircle.Pages
         protected void Page_Load(object sender, EventArgs e) {
             using (var db = new LindyCircleContext()) {
                 var memberID = int.Parse(Page.RouteData.Values["memberID"].ToString());
-                lblMemberName.Text = db.Members.First(t => t.MemberID == memberID).FirstLastName;
+                lblMemberName.Text = db.Members.Single(t => t.MemberID == memberID).FirstLastName;
             }
         }
 

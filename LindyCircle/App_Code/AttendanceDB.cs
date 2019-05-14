@@ -22,7 +22,8 @@ namespace LindyCircle
                             orderby t.Member.FirstName, t.Member.LastName
                             select t;
                 foreach (var row in query)
-                    dt.Rows.Add(row.AttendanceID, row.Member.FirstLastName, row.PaymentType, row.PaymentTypeText, row.PaymentAmount);
+                    dt.Rows.Add(row.AttendanceID, row.Member.FirstLastName, row.PaymentType, 
+                        row.PaymentTypeText, row.PaymentAmount);
             }
             return dt;
         }

@@ -43,7 +43,9 @@
             <asp:Panel ID="panNewPractice" runat="server" Visible="false">
                 <asp:Label ID="lblNewPractice" runat="server" Text=""></asp:Label>
                 <br />
-                Rental Cost<asp:TextBox ID="txtNewRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
+                Practice Topic:<asp:TextBox ID="txtNewTopic" runat="server" CssClass="textbox" Width="400px"></asp:TextBox>
+                <br />
+                Rental Cost:<asp:TextBox ID="txtNewRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
                 <asp:CompareValidator ID="valNewRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number."
                     ControlToValidate="txtNewRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgNewPractice">*</asp:CompareValidator>
@@ -99,7 +101,9 @@
                     </Columns>
                 </asp:GridView>
                 <br />
-                Rental Cost<asp:TextBox ID="txtRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
+                Practice Topic:<asp:TextBox ID="txtTopic" runat="server" CssClass="textbox" Width="400px"></asp:TextBox>
+                <br />
+                Rental Cost:<asp:TextBox ID="txtRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
                 <asp:CompareValidator ID="valRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number."
                     ControlToValidate="txtRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
@@ -114,7 +118,7 @@
                     ControlToValidate="txtMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
                 <br />
-                <asp:Button ID="btnSave" runat="server" Text="Save expenses/revenue" OnClick="btnSave_Click" ValidationGroup="vgPractice" />
+                <asp:Button ID="btnSave" runat="server" Text="Save practice details" OnClick="btnSave_Click" ValidationGroup="vgPractice" />
                 <br />
                 <asp:ValidationSummary ID="ValidationSummary4" runat="server" CssClass="warning" ValidationGroup="vgPractice" />
                 <asp:Label ID="lblSaveStatus" runat="server" Text=""></asp:Label>

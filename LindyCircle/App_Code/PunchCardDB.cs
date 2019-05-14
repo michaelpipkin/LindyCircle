@@ -29,7 +29,7 @@ namespace LindyCircle
         [DataObjectMethod(DataObjectMethodType.Delete)]
         public static void DeletePunchCard(int punchCardID) {
             using (var db = new LindyCircleContext()) {
-                var punchCard = db.PunchCards.FirstOrDefault(t => t.PunchCardID == punchCardID);
+                var punchCard = db.PunchCards.SingleOrDefault(t => t.PunchCardID == punchCardID);
                 if (punchCard != null) {
                     db.PunchCards.Remove(punchCard);
                     db.SaveChanges();

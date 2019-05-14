@@ -44,7 +44,7 @@ namespace LindyCircle.Pages
         protected void btnDelete_Command(object sender, CommandEventArgs e) {
             var punchCardID = int.Parse(e.CommandArgument.ToString());
             using (var db = new LindyCircleContext()) {
-                var punchCard = db.PunchCards.FirstOrDefault(t => t.PunchCardID == punchCardID);
+                var punchCard = db.PunchCards.SingleOrDefault(t => t.PunchCardID == punchCardID);
                 if (punchCard != null) {
                     db.PunchCards.Remove(punchCard);
                     db.SaveChanges();
@@ -65,7 +65,7 @@ namespace LindyCircle.Pages
         protected void UpdateUnusedPunches() {
             using (var db = new LindyCircleContext()) {
                 var memberID = int.Parse(ddlMembers.SelectedValue);
-                lblUnusedPunches.Text = db.Members.First(t => t.MemberID == memberID).RemainingPunches.ToString();
+                lblUnusedPunches.Text = db.Members.Single(t => t.MemberID == memberID).RemainingPunches.ToString();
             }
         }
     }

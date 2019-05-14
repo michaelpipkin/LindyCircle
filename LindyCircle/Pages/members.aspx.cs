@@ -33,7 +33,7 @@ namespace LindyCircle.Pages
             var row = (GridViewRow)checkbox.Parent.Parent;
             var memberID = (int)gvMembers.DataKeys[row.RowIndex].Value;
             using (var db = new LindyCircleContext()) {
-                var member = db.Members.First(t => t.MemberID == memberID);
+                var member = db.Members.Single(t => t.MemberID == memberID);
                 member.Inactive = checkbox.Checked;
                 db.SaveChanges();
                 gvMembers.DataBind();
