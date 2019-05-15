@@ -45,15 +45,20 @@
         <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
         <Columns>
             <asp:BoundField DataField="PracticeID" HeaderText="PracticeID" Visible="false" />
-            <asp:TemplateField HeaderText="Number" ItemStyle-Width="50px" SortExpression="PracticeNumber" FooterText="Totals"
+            <asp:TemplateField HeaderText="Number" HeaderStyle-Width="60px" SortExpression="PracticeNumber" FooterText="Totals"
                 ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align">
                 <ItemTemplate>
                     <a href="/practice/<%# Eval("PracticeID") %>">
-                        <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("PracticeNumber") %>'></asp:Label></a>
+                        <asp:Label ID="lblPracticeNumber" runat="server" Text='<%# Eval("PracticeNumber") %>'></asp:Label></a>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="PracticeDate" HeaderText="Date" HeaderStyle-CssClass="column-left-align"
-                ItemStyle-Width="80px" DataFormatString="{0:yyyy-MM-dd}" ItemStyle-CssClass="column-left-align" />
+            <asp:TemplateField HeaderText="Date" HeaderStyle-Width="80px"
+                ItemStyle-CssClass="column-left-align" HeaderStyle-CssClass="column-left-align">
+                <ItemTemplate>
+                    <a href="/practice/<%# Eval("PracticeID") %>">
+                        <asp:Label ID="lblPracticeDate" runat="server" Text='<%# Eval("PracticeDate", "{0:yyyy-MM-dd}") %>'></asp:Label></a>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="Topic" HeaderText="Topic" HeaderStyle-CssClass="column-left-align"
                 ItemStyle-CssClass="column-left-align" />
             <asp:BoundField DataField="PracticeCost" HeaderText="Rental cost" ItemStyle-CssClass="column-right-align"
@@ -71,7 +76,7 @@
             <asp:BoundField DataField="Attendees" HeaderText="Attendees" SortExpression="Attendees"
                 ItemStyle-CssClass="column-right-align" FooterStyle-HorizontalAlign="Right"
                 HeaderStyle-CssClass="column-right-align" HeaderStyle-Width="75px" />
-            <asp:CommandField ButtonType="Link" ShowDeleteButton="True" ItemStyle-Width="50px" />
+            <asp:CommandField ButtonType="Link" ShowDeleteButton="True" ItemStyle-Width="50px" ItemStyle-CssClass="column-center-align" />
         </Columns>
     </asp:GridView>
 </asp:Content>

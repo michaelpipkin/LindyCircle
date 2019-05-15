@@ -16,6 +16,7 @@ namespace LindyCircle.Pages
                         if (member != null) {
                             lblMemberName.Text = member.FirstLastName;
                             lblUnusedPunches.Text = member.RemainingPunches.ToString();
+                            lblTotalPaid.Text = member.TotalPaid.ToString("#,##0.00");
                         }
                         else Response.Redirect("~/members", true);
                     }

@@ -55,5 +55,18 @@ namespace LindyCircle.Pages
                 args.IsValid = (practice == null || practice.PracticeID == practiceID);
             }
         }
+
+        protected void gvAttendance_DataBound(object sender, EventArgs e) {
+            var attendance = 0;
+            var totalCollected = 0M;
+            foreach (GridViewRow row in gvAttendance.Rows) {
+                if (row.RowType == DataControlRowType.DataRow) {
+                    attendance++;
+                    totalCollected += decimal.Parse(row.Cells[4].Text);
+                }
+                gvAttendance.FooterRow.Cells[1].Text = "Attended: " + attendance.ToString();
+                gvAttendance.FooterRow.Cells[4].Text = totalCollected.ToString("#,##0.00");
+            }
+        }
     }
 }

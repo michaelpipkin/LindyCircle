@@ -13,6 +13,8 @@
         </SelectParameters>
     </asp:ObjectDataSource>
     <br />
+    Practice Date:&nbsp;&nbsp;<asp:Label ID="lblPracticeDate" runat="server" Text=""></asp:Label>
+    <br />
     Practice Number:<asp:TextBox ID="txtPracticeNumber" runat="server" CssClass="textbox" Width="30px"></asp:TextBox>
     <asp:RequiredFieldValidator ID="valPracticeNumberRequired" runat="server" ErrorMessage="Practice Number is required."
         CssClass="warning" Display="Dynamic" ControlToValidate="txtPracticeNumber" ValidationGroup="vgPractice">*</asp:RequiredFieldValidator>
@@ -23,24 +25,6 @@
         ErrorMessage="This Practice Number is already assigned to another practice."
         ControlToValidate="txtPracticeNumber" ValidationGroup="vgPractice"
         OnServerValidate="valPracticeNumberUnique_ServerValidate">*</asp:CustomValidator>
-    <br />
-    Practice Date:<asp:Label ID="lblPracticeDate" runat="server" Text=""></asp:Label>
-    <asp:GridView ID="gvAttendance" runat="server" DataSourceID="odsAttendance" AutoGenerateColumns="False"
-        DataKeyNames="AttendanceID">
-        <AlternatingRowStyle BackColor="#CCCCCC" />
-        <Columns>
-            <asp:BoundField DataField="AttendanceID" HeaderText="ID" Visible="false" />
-            <asp:TemplateField HeaderText="Name" ItemStyle-Width="150px" SortExpression="MemberName">
-                <ItemTemplate>
-                    <a href="/member/<%# Eval("MemberID") %>">
-                        <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("Member") %>'></asp:Label></a>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:BoundField DataField="PaymentType" Visible="false" />
-            <asp:BoundField DataField="PaymentTypeText" HeaderText="Payment Type" ItemStyle-Width="100px" />
-            <asp:BoundField DataField="PaymentAmount" HeaderText="Amount" ItemStyle-Width="75px" />
-        </Columns>
-    </asp:GridView>
     <br />
     Practice Topic:<asp:TextBox ID="txtTopic" runat="server" CssClass="textbox" Width="400px"></asp:TextBox>
     <br />
@@ -63,4 +47,22 @@
     <br />
     <asp:ValidationSummary ID="ValidationSummary4" runat="server" CssClass="warning" ValidationGroup="vgPractice" />
     <asp:Label ID="lblSaveStatus" runat="server" Text=""></asp:Label>
+    <asp:GridView ID="gvAttendance" runat="server" DataSourceID="odsAttendance" AutoGenerateColumns="False"
+        DataKeyNames="AttendanceID" ShowFooter="True" OnDataBound="gvAttendance_DataBound" Caption="Attendees">
+        <AlternatingRowStyle BackColor="#CCCCCC" />
+        <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
+        <Columns>
+            <asp:BoundField DataField="AttendanceID" HeaderText="ID" Visible="false" />
+            <asp:TemplateField HeaderText="Name" ItemStyle-Width="150px" SortExpression="MemberName" FooterText="Attended:">
+                <ItemTemplate>
+                    <a href="/member/<%# Eval("MemberID") %>">
+                        <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("Member") %>'></asp:Label></a>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="PaymentType" Visible="false" />
+            <asp:BoundField DataField="PaymentTypeText" HeaderText="Payment Type" ItemStyle-Width="100px" FooterText="Collected" />
+            <asp:BoundField DataField="PaymentAmount" HeaderText="Amount" ItemStyle-Width="75px" HeaderStyle-CssClass="column-right-align" 
+                            ItemStyle-CssClass="column-right-align" FooterStyle-CssClass="column-right-align" />
+        </Columns>
+    </asp:GridView>
 </asp:Content>

@@ -14,8 +14,6 @@ namespace LindyCircle.Pages
                 ddlPaymentTypes.Items.Add(new ListItem("Door price", "1"));
                 ddlPaymentTypes.Items.Add(new ListItem("Punch card", "2"));
                 ddlPaymentTypes.Items.Add(new ListItem("Other", "3"));
-                ddlPaymentTypes.SelectedIndex = 2;
-                txtPaymentAmount.Text = "0.00";
             }
         }
 
@@ -38,26 +36,36 @@ namespace LindyCircle.Pages
             using (var db = new LindyCircleContext()) {
                 var practice = db.Practices.SingleOrDefault(t => t.PracticeDate == practiceDate);
                 if (practice != null) {
-                    txtPracticeID.Text = practice.PracticeID.ToString();
+                    hidPracticeID.Value = practice.PracticeID.ToString();
                     txtPracticeNumber.Text = practice.PracticeNumber.ToString();
                     txtTopic.Text = practice.PracticeTopic;
                     txtRentalCost.Text = practice.PracticeCost.ToString("0.00");
                     txtMiscExpense.Text = practice.MiscExpense.ToString("0.00");
                     txtMiscRevenue.Text = practice.MiscRevenue.ToString("0.00");
-                    panNewPractice.Visible = false;
                     panPracticeDetails.Visible = true;
+                    panPracticeMembers.Visible = true;
+                    btnAddPractice.Visible = false;
+                    btnCancelAddPractice.Visible = false;
+                    btnSaveDetails.Visible = true;
+                    lblNewPractice.Text = string.Empty;
+                    lblSaveStatus.Text = string.Empty;
                 }
                 else {
-                    panPracticeDetails.Visible = false;
+                    hidPracticeID.Value = null;
+                    panPracticeDetails.Visible = true;
+                    panPracticeMembers.Visible = false;
+                    btnAddPractice.Visible = true;
+                    btnCancelAddPractice.Visible = true;
+                    btnSaveDetails.Visible = false;
                     lblNewPractice.Text = "Would you like to add a new practice dated " +
                         calPracticeDate.SelectedDate.ToShortDateString() + "?";
-                        txtNewPracticeNumber.Text = (db.Practices.Max(t => t.PracticeNumber) + 1).ToString();
-                    txtNewTopic.Text = string.Empty;
-                    txtNewRentalCost.Text = db.Defaults.Single(t => t.DefaultName.Equals("Rental Cost")).
+                    txtPracticeNumber.Text = (db.Practices.Max(t => t.PracticeNumber) + 1).ToString();
+                    txtTopic.Text = string.Empty;
+                    txtRentalCost.Text = db.Defaults.Single(t => t.DefaultName.Equals("Rental Cost")).
                         DefaultValue.ToString("0.00");
-                    txtNewMiscExpense.Text = "0.00";
-                    txtNewMiscRevenue.Text = "0.00";
-                    panNewPractice.Visible = true;
+                    txtMiscExpense.Text = "0.00";
+                    txtMiscRevenue.Text = "0.00";
+                    lblSaveStatus.Text = string.Empty;
                 }
             }
         }
@@ -69,33 +77,31 @@ namespace LindyCircle.Pages
         protected void btnAddPractice_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
                 using (var db = new LindyCircleContext()) {
-                    var nextPracticeNumber = int.Parse(txtNewPracticeNumber.Text);
-                    var newPractice = new Practice();
-                    newPractice.PracticeNumber = nextPracticeNumber;
-                    newPractice.PracticeDate = calPracticeDate.SelectedDate;
-                    newPractice.PracticeTopic = txtNewTopic.Text;
-                    if (string.IsNullOrEmpty(txtNewRentalCost.Text)) newPractice.PracticeCost = 0M;
-                    else newPractice.PracticeCost = decimal.Parse(txtNewRentalCost.Text);
-                    if (string.IsNullOrEmpty(txtNewMiscExpense.Text)) newPractice.MiscExpense = 0M;
-                    else newPractice.MiscExpense = decimal.Parse(txtNewMiscExpense.Text);
-                    if (string.IsNullOrEmpty(txtNewMiscRevenue.Text)) newPractice.MiscRevenue = 0M;
-                    else newPractice.MiscRevenue = decimal.Parse(txtNewMiscRevenue.Text);
-                    db.Practices.Add(newPractice);
+                    var practice = new Practice();
+                    practice.PracticeNumber = int.Parse(txtPracticeNumber.Text);
+                    practice.PracticeDate = calPracticeDate.SelectedDate;
+                    practice.PracticeTopic = txtTopic.Text;
+                    if (string.IsNullOrEmpty(txtRentalCost.Text)) practice.PracticeCost = 0M;
+                    else practice.PracticeCost = decimal.Parse(txtRentalCost.Text);
+                    if (string.IsNullOrEmpty(txtMiscExpense.Text)) practice.MiscExpense = 0M;
+                    else practice.MiscExpense = decimal.Parse(txtMiscExpense.Text);
+                    if (string.IsNullOrEmpty(txtMiscRevenue.Text)) practice.MiscRevenue = 0M;
+                    else practice.MiscRevenue = decimal.Parse(txtMiscRevenue.Text);
+                    db.Practices.Add(practice);
                     db.SaveChanges();
-                    txtPracticeID.Text = db.Practices.Max(t => t.PracticeID).ToString();
-                    panNewPractice.Visible = false;
-                    txtPracticeNumber.Text = newPractice.PracticeNumber.ToString();
-                    txtTopic.Text = newPractice.PracticeTopic;
-                    txtRentalCost.Text = newPractice.PracticeCost.ToString("#,##0.00");
-                    txtMiscExpense.Text = newPractice.MiscExpense.ToString("#,##0.00");
-                    txtMiscRevenue.Text = newPractice.MiscRevenue.ToString("#,##0.00");
-                    panPracticeDetails.Visible = true;
+                    hidPracticeID.Value = db.Practices.Max(t => t.PracticeID).ToString();
+                    btnAddPractice.Visible = false;
+                    btnCancelAddPractice.Visible = false;
+                    btnSaveDetails.Visible = true;
+                    panPracticeMembers.Visible = true;
+                    lblNewPractice.Text = string.Empty;
+                    lblSaveStatus.Text = string.Empty;
                 }
             }
         }
 
         protected void btnCancelAddPractice_Click(object sender, EventArgs e) {
-            panNewPractice.Visible = false;
+            panPracticeDetails.Visible = false;
             txtPracticeDate.Text = string.Empty;
         }
 
@@ -131,7 +137,7 @@ namespace LindyCircle.Pages
         protected void btnCheckIn_Click(object sender, EventArgs e) {
             var attendance = new Attendance();
             attendance.MemberID = int.Parse(ddlMembers.SelectedValue);
-            attendance.PracticeID = int.Parse(txtPracticeID.Text);
+            attendance.PracticeID = int.Parse(hidPracticeID.Value);
             attendance.PaymentType = int.Parse(ddlPaymentTypes.SelectedValue);
             if (string.IsNullOrEmpty(txtPaymentAmount.Text)) attendance.PaymentAmount = 0M;
             else attendance.PaymentAmount = decimal.Parse(txtPaymentAmount.Text);
@@ -146,7 +152,7 @@ namespace LindyCircle.Pages
         protected void btnSaveDetails_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
                 using (var db = new LindyCircleContext()) {
-                    var practiceID = int.Parse(txtPracticeID.Text);
+                    var practiceID = int.Parse(hidPracticeID.Value);
                     var practice = db.Practices.Single(t => t.PracticeID == practiceID);
                     practice.PracticeTopic = txtTopic.Text;
                     if (string.IsNullOrEmpty(txtRentalCost.Text)) practice.PracticeCost = 0M;
@@ -181,20 +187,29 @@ namespace LindyCircle.Pages
             }
         }
 
-        protected void valNewPracticeNumberUnique_ServerValidate(object source, ServerValidateEventArgs args) {
-            var practiceNumber = int.Parse(txtNewPracticeNumber.Text);
-            using (var db = new LindyCircleContext()) {
-                var practice = db.Practices.SingleOrDefault(t => t.PracticeNumber == practiceNumber);
-                args.IsValid = practice == null;
-            }
-        }
-
         protected void valPracticeNumberUnique_ServerValidate(object source, ServerValidateEventArgs args) {
-            var practiceID = int.Parse(txtPracticeID.Text);
             var practiceNumber = int.Parse(txtPracticeNumber.Text);
             using (var db = new LindyCircleContext()) {
                 var practice = db.Practices.SingleOrDefault(t => t.PracticeNumber == practiceNumber);
-                args.IsValid = (practice == null || practice.PracticeID == practiceID);
+                if (hidPracticeID.Value == null)
+                    args.IsValid = practice == null;
+                else {
+                    var practiceID = int.Parse(hidPracticeID.Value);
+                    args.IsValid = (practice == null || practice.PracticeID == practiceID);
+                }
+            }
+        }
+
+        protected void gvAttendance_DataBound(object sender, EventArgs e) {
+            var attendance = 0;
+            var totalCollected = 0M;
+            foreach (GridViewRow row in gvAttendance.Rows) {
+                if (row.RowType == DataControlRowType.DataRow) {
+                    attendance++;
+                    totalCollected += decimal.Parse(row.Cells[4].Text);
+                }
+                gvAttendance.FooterRow.Cells[1].Text = "Attended: " + attendance.ToString();
+                gvAttendance.FooterRow.Cells[4].Text = totalCollected.ToString("#,##0.00");
             }
         }
     }

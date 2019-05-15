@@ -35,7 +35,7 @@
                 ClientIDMode="Static" OnDataBound="ddlMembers_DataBound" OnSelectedIndexChanged="ddlMembers_SelectedIndexChanged">
             </asp:DropDownList>
             Unused punches:<asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
-            <br />
+            <br /><br />
             Purchase Date:<asp:TextBox ID="txtPurchaseDate" runat="server" ValidationGroup="vgPurchaseCard"
                 CssClass="textbox" Width="80px" ClientIDMode="Static"></asp:TextBox>
             <asp:RequiredFieldValidator ID="valPurchaseDateRequired" runat="server" ErrorMessage="Purchase date is required."
@@ -65,15 +65,16 @@
                 <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
                 <Columns>
                     <asp:BoundField DataField="PunchCardID" HeaderText="PunchCardID" Visible="false" />
-                    <asp:BoundField DataField="PurchaseDate" HeaderText="Purchase Date" ItemStyle-Width="85px" 
+                    <asp:BoundField DataField="PurchaseDate" HeaderText="Purchase Date" HeaderStyle-Width="105px" 
                         DataFormatString="{0:yyyy-MM-dd}" FooterText="Total">
                         <ItemStyle Width="85px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="PurchaseAmount" HeaderText="Amount" ItemStyle-Width="75px" 
-                        DataFormatString="{0:n2}">
+                        DataFormatString="{0:n2}" HeaderStyle-CssClass="column-right-align" ItemStyle-CssClass="column-right-align" 
+                        FooterStyle-CssClass="column-right-align">
                         <ItemStyle Width="75px" />
                     </asp:BoundField>
-                    <asp:TemplateField>
+                    <asp:TemplateField ItemStyle-CssClass="column-center-align" ItemStyle-Width="50px">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" CommandName="Delete"
                                 OnCommand="btnDelete_Command" CommandArgument='<%#Eval("PunchCardID") %>'></asp:LinkButton>

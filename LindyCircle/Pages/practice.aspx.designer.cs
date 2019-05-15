@@ -22,6 +22,15 @@ namespace LindyCircle.Pages {
         protected global::System.Web.UI.WebControls.ObjectDataSource odsAttendance;
         
         /// <summary>
+        /// lblPracticeDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPracticeDate;
+        
+        /// <summary>
         /// txtPracticeNumber control.
         /// </summary>
         /// <remarks>
@@ -56,24 +65,6 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator valPracticeNumberUnique;
-        
-        /// <summary>
-        /// lblPracticeDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPracticeDate;
-        
-        /// <summary>
-        /// gvAttendance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvAttendance;
         
         /// <summary>
         /// txtTopic control.
@@ -164,5 +155,14 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSaveStatus;
+        
+        /// <summary>
+        /// gvAttendance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvAttendance;
     }
 }

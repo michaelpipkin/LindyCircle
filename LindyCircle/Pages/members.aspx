@@ -15,6 +15,12 @@
         tr td a {
             color: black;
         }
+        td span {
+            padding-right: 10px;
+        }
+        label {
+            font-weight: normal;
+        }
     </style>
     <asp:ObjectDataSource ID="odsMembers" runat="server" OldValuesParameterFormatString="original_{0}"
         SelectMethod="GetMembers" TypeName="LindyCircle.MemberDB">
@@ -47,23 +53,18 @@
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="MemberID" HeaderText="MemberID" Visible="false" />
-                    <asp:TemplateField HeaderText="Name" ItemStyle-Width="150px" SortExpression="MemberName">
+                    <asp:TemplateField HeaderText="Name" SortExpression="MemberName">
                         <ItemTemplate>
                             <a href="/member/<%# Eval("MemberID") %>">
                                 <asp:Label ID="lblMemberName" runat="server" Text='<%# Eval("MemberName") %>'></asp:Label></a>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:BoundField DataField="Attended" HeaderText="Attended" SortExpression="Attended" ItemStyle-Width="65px">
-                        <ItemStyle Width="65px" />
-                    </asp:BoundField>
-                    <asp:BoundField DataField="PunchCards" HeaderText="Punch cards" ItemStyle-Width="65px">
-                        <ItemStyle Width="65px" />
-                    </asp:BoundField>
-                    <asp:BoundField DataField="UnusedPunches" HeaderText="Unused punches" ItemStyle-Width="65px">
-                        <ItemStyle Width="65px" />
-                    </asp:BoundField>
-                    <asp:TemplateField HeaderText="Inactive">
-                        <ItemStyle HorizontalAlign="Center" Width="50px" />
+                    <asp:BoundField DataField="Attended" HeaderText="Attended" SortExpression="Attended" HeaderStyle-Width="65px" />
+                    <asp:BoundField DataField="PunchCards" HeaderText="Punch cards" HeaderStyle-Width="65px" />
+                    <asp:BoundField DataField="UnusedPunches" HeaderText="Unused punches" HeaderStyle-Width="65px" />
+                    <asp:TemplateField HeaderText="Inactive" HeaderStyle-Width="65px">
+                        <HeaderStyle CssClass="column-center-align" />
+                        <ItemStyle HorizontalAlign="Center" />
                         <ItemTemplate>
                             <asp:CheckBox ID="ckbInactive" runat="server" AutoPostBack="True"
                                 OnCheckedChanged="ckbInactive_CheckedChanged" Checked='<%# Eval("Inactive") %>' />
