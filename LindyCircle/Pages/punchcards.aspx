@@ -12,6 +12,11 @@
             }
         }
     </script>
+    <style type="text/css">
+        tr td a {
+            color: black;
+        }
+    </style>
     <asp:ObjectDataSource ID="odsMembers" runat="server"
         SelectMethod="GetMemberList" TypeName="LindyCircle.MemberDB"></asp:ObjectDataSource>
     <asp:ObjectDataSource ID="odsPunchCards" runat="server"
@@ -34,7 +39,7 @@
                 DataTextField="FirstLastName" DataValueField="MemberID" CssClass="textbox" CausesValidation="false" 
                 ClientIDMode="Static" OnDataBound="ddlMembers_DataBound" OnSelectedIndexChanged="ddlMembers_SelectedIndexChanged">
             </asp:DropDownList>
-            Unused punches:<asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
+            &nbsp;&nbsp;Unused punches:&nbsp;&nbsp;<asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
             <br /><br />
             Purchase Date:<asp:TextBox ID="txtPurchaseDate" runat="server" ValidationGroup="vgPurchaseCard"
                 CssClass="textbox" Width="80px" ClientIDMode="Static"></asp:TextBox>
@@ -60,7 +65,7 @@
             <br />
             <asp:GridView ID="gvPunchCards" runat="server" DataSourceID="odsPunchCards" AutoGenerateColumns="False"
                 DataKeyNames="PunchCardID" EmptyDataText="This member has not purchased any punch cards." ShowFooter="true" 
-                OnDataBound="gvPunchCards_DataBound">
+                OnDataBound="gvPunchCards_DataBound" OnRowDeleting="gvPunchCards_RowDeleting">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
                 <Columns>
@@ -77,7 +82,7 @@
                     <asp:TemplateField ItemStyle-CssClass="column-center-align" ItemStyle-Width="50px">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" CommandName="Delete"
-                                OnCommand="btnDelete_Command" CommandArgument='<%#Eval("PunchCardID") %>'></asp:LinkButton>
+                                CommandArgument='<%#Eval("PunchCardID") %>'></asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

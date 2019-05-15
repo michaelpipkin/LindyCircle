@@ -11,7 +11,11 @@
             <asp:ControlParameter ControlID="hidPracticeID" Name="practiceID" PropertyName="Value" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    <asp:ObjectDataSource ID="odsAttendance" runat="server" SelectMethod="GetPracticeAttendees" TypeName="LindyCircle.AttendanceDB">
+    <asp:ObjectDataSource ID="odsAttendance" runat="server" SelectMethod="GetPracticeAttendees" TypeName="LindyCircle.AttendanceDB"
+        DeleteMethod="DeleteAttendance">
+        <DeleteParameters>
+            <asp:Parameter Name="attendanceID" Type="Int32" />
+        </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="hidPracticeID" Name="practiceID" PropertyName="Value" Type="Int32" />
         </SelectParameters>
@@ -93,6 +97,9 @@
                 </asp:DropDownList>
                 &nbsp;Unused punches:
                 <asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
+                <asp:CustomValidator ID="valPunchesRemaining" runat="server" ErrorMessage="Member has no unused punches."
+                    Display="Dynamic" ValidationGroup="vgAddMember" CssClass="warning" 
+                    OnServerValidate="valPunchesRemaining_ServerValidate">*</asp:CustomValidator>
                 <br />
                 Payment method:<asp:DropDownList ID="ddlPaymentTypes" runat="server" CssClass="textbox"
                     OnSelectedIndexChanged="ddlPaymentTypes_SelectedIndexChanged" AutoPostBack="true">
@@ -104,7 +111,6 @@
                 <asp:Button ID="btnCheckIn" runat="server" Text="Check in" CssClass="textbox"
                     OnClick="btnCheckIn_Click" ValidationGroup="vgAddMember" />
                 <asp:ValidationSummary ID="ValidationSummary3" runat="server" CssClass="warning" ValidationGroup="vgAddMember" />
-                <br />
                 <asp:GridView ID="gvAttendance" runat="server" DataSourceID="odsAttendance" AutoGenerateColumns="False"
                     DataKeyNames="AttendanceID" ShowFooter="True" OnDataBound="gvAttendance_DataBound" Caption="Attendees">
                     <AlternatingRowStyle BackColor="#CCCCCC" />
@@ -119,12 +125,12 @@
                         </asp:TemplateField>
                         <asp:BoundField DataField="PaymentType" Visible="false" />
                         <asp:BoundField DataField="PaymentTypeText" HeaderText="Payment Type" ItemStyle-Width="100px" FooterText="Collected" />
-                        <asp:BoundField DataField="PaymentAmount" HeaderText="Amount" HeaderStyle-Width="75px" HeaderStyle-CssClass="column-right-align" 
+                        <asp:BoundField DataField="PaymentAmount" HeaderText="Amount" HeaderStyle-Width="75px" HeaderStyle-CssClass="column-right-align"
                             ItemStyle-CssClass="column-right-align" FooterStyle-CssClass="column-right-align" />
                         <asp:TemplateField ItemStyle-CssClass="column-center-align" ItemStyle-Width="50px">
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnRemove" runat="server" Text="Remove" CommandName="Delete"
-                                    OnCommand="btnRemove_Command" CommandArgument='<%#Eval("AttendanceID") %>'></asp:LinkButton>
+                                    CommandArgument='<%#Eval("AttendanceID") %>'></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

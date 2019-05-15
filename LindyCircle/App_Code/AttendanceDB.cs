@@ -37,5 +37,16 @@ namespace LindyCircle
                 return members.Except(attendees).OrderBy(t => t.FirstName).ThenBy(t => t.LastName).ToList();
             }
         }
+
+        [DataObjectMethod(DataObjectMethodType.Delete)]
+        public static void DeleteAttendance(int attendanceID) {
+            using (var db = new LindyCircleContext()) {
+                var attendance = db.Attendances.SingleOrDefault(t => t.AttendanceID == attendanceID);
+                if (attendance != null) {
+                    db.Attendances.Remove(attendance);
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }

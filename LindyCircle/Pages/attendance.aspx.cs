@@ -135,19 +135,21 @@ namespace LindyCircle.Pages
         }
 
         protected void btnCheckIn_Click(object sender, EventArgs e) {
-            var attendance = new Attendance();
-            attendance.MemberID = int.Parse(ddlMembers.SelectedValue);
-            attendance.PracticeID = int.Parse(hidPracticeID.Value);
-            attendance.PaymentType = int.Parse(ddlPaymentTypes.SelectedValue);
-            if (string.IsNullOrEmpty(txtPaymentAmount.Text)) attendance.PaymentAmount = 0M;
-            else attendance.PaymentAmount = decimal.Parse(txtPaymentAmount.Text);
-            using (var db = new LindyCircleContext()) {
-                db.Attendances.Add(attendance);
-                db.SaveChanges();
-                gvAttendance.DataBind();
-                ddlMembers.DataBind();
+            if (Page.IsValid) {
+                var attendance = new Attendance();
+                attendance.MemberID = int.Parse(ddlMembers.SelectedValue);
+                attendance.PracticeID = int.Parse(hidPracticeID.Value);
+                attendance.PaymentType = int.Parse(ddlPaymentTypes.SelectedValue);
+                if (string.IsNullOrEmpty(txtPaymentAmount.Text)) attendance.PaymentAmount = 0M;
+                else attendance.PaymentAmount = decimal.Parse(txtPaymentAmount.Text);
+                using (var db = new LindyCircleContext()) {
+                    db.Attendances.Add(attendance);
+                    db.SaveChanges();
+                    gvAttendance.DataBind();
+                }
             }
         }
+
 
         protected void btnSaveDetails_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
@@ -163,19 +165,6 @@ namespace LindyCircle.Pages
                     else practice.MiscRevenue = decimal.Parse(txtMiscRevenue.Text);
                     db.SaveChanges();
                     lblSaveStatus.Text = "Practice details updated.";
-                }
-            }
-        }
-
-        protected void btnRemove_Command(object sender, CommandEventArgs e) {
-            var attendanceID = int.Parse(e.CommandArgument.ToString());
-            using (var db = new LindyCircleContext()) {
-                var attendance = db.Attendances.SingleOrDefault(t => t.AttendanceID == attendanceID);
-                if (attendance != null) {
-                    db.Attendances.Remove(attendance);
-                    db.SaveChanges();
-                    gvAttendance.DataBind();
-                    ddlMembers.DataBind();
                 }
             }
         }
@@ -210,6 +199,16 @@ namespace LindyCircle.Pages
                 }
                 gvAttendance.FooterRow.Cells[1].Text = "Attended: " + attendance.ToString();
                 gvAttendance.FooterRow.Cells[4].Text = totalCollected.ToString("#,##0.00");
+            }
+            ddlMembers.DataBind();
+        }
+
+        protected void valPunchesRemaining_ServerValidate(object source, ServerValidateEventArgs args) {
+            if (ddlPaymentTypes.SelectedValue.Equals("2")) {
+                var memberID = int.Parse(ddlMembers.SelectedValue);
+                using (var db = new LindyCircleContext()) {
+                    args.IsValid = db.Members.Single(t => t.MemberID == memberID).RemainingPunches > 0;
+                }
             }
         }
     }
