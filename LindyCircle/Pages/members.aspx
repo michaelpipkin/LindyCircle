@@ -35,12 +35,12 @@
             <asp:AsyncPostBackTrigger ControlID="ckbActive" />
         </Triggers>
         <ContentTemplate>
-            First Name:<asp:TextBox ID="txtFirstName" runat="server" CssClass="textbox" ClientIDMode="Static" Width="75px"></asp:TextBox>
+            First Name:<asp:TextBox ID="txtFirstName" runat="server" CssClass="control-margin-left" ClientIDMode="Static" Width="75px"></asp:TextBox>
             <asp:RequiredFieldValidator ID="valFirstName" runat="server" ErrorMessage="First Name is required." Display="Dynamic"
-                ValidationGroup="vgNewMember" CssClass="warning" ControlToValidate="txtFirstName">*&nbsp;</asp:RequiredFieldValidator>
-            Last Name:<asp:TextBox ID="txtLastName" runat="server" CssClass="textbox" ClientIDMode="Static" Width="75px"></asp:TextBox>
+                ValidationGroup="vgNewMember" CssClass="warning control-margin-right" ControlToValidate="txtFirstName">*</asp:RequiredFieldValidator>
+            Last Name:<asp:TextBox ID="txtLastName" runat="server" CssClass="control-margin-left" ClientIDMode="Static" Width="75px"></asp:TextBox>
             <asp:RequiredFieldValidator ID="valLastName" runat="server" ErrorMessage="Last Name is required." Display="Dynamic"
-                ValidationGroup="vgNewMember" CssClass="warning" ControlToValidate="txtLastName">*&nbsp;</asp:RequiredFieldValidator>
+                ValidationGroup="vgNewMember" CssClass="warning control-margin-right" ControlToValidate="txtLastName">*</asp:RequiredFieldValidator>
             <asp:Button ID="btnNew" runat="server" Text="Add member" OnClick="btnNew_Click" ClientIDMode="Static"
                 ValidationGroup="vgNewMember" OnClientClick="DisableForm();" UseSubmitBehavior="false" />
             <br />

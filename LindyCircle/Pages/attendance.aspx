@@ -29,11 +29,11 @@
             <asp:AsyncPostBackTrigger ControlID="ddlMembers" />
         </Triggers>
         <ContentTemplate>
-            Practice Date:<asp:TextBox ID="txtPracticeDate" runat="server" Width="85px" CssClass="textbox"
+            Practice Date:<asp:TextBox ID="txtPracticeDate" runat="server" Width="85px" CssClass="control-margin-left"
                 OnTextChanged="txtPracticeDate_TextChanged" CausesValidation="true"></asp:TextBox>
             <asp:CompareValidator ID="valPracticeDate" runat="server" ErrorMessage="Invalid format for practice date."
                 CssClass="warning" ControlToValidate="txtPracticeDate" Operator="DataTypeCheck" Type="Date"
-                ValidationGroup="vgPracticeDate" Display="Dynamic">*&nbsp;</asp:CompareValidator>
+                ValidationGroup="vgPracticeDate" Display="Dynamic">*</asp:CompareValidator>
             <asp:HiddenField ID="hidPracticeID" runat="server" />
             <asp:Calendar ID="calPracticeDate" runat="server" BackColor="White" BorderColor="#999999" CellPadding="4"
                 DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" Height="180px"
@@ -51,7 +51,7 @@
             <asp:Panel ID="panPracticeDetails" runat="server" Visible="false">
                 <asp:Label ID="lblNewPractice" runat="server" Text=""></asp:Label>
                 <br />
-                Practice Number:<asp:TextBox ID="txtPracticeNumber" runat="server" CssClass="textbox" Width="30px"></asp:TextBox>
+                Practice Number:<asp:TextBox ID="txtPracticeNumber" runat="server" CssClass="control-margin-left" Width="30px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="valPracticeNumberRequired" runat="server" ErrorMessage="Practice Number is required."
                     CssClass="warning" Display="Dynamic" ControlToValidate="txtPracticeNumber"
                     ValidationGroup="vgPractice">*</asp:RequiredFieldValidator>
@@ -63,19 +63,19 @@
                     ControlToValidate="txtPracticeNumber" ValidationGroup="vgPractice"
                     OnServerValidate="valPracticeNumberUnique_ServerValidate">*</asp:CustomValidator>
                 <br />
-                Practice Topic:<asp:TextBox ID="txtTopic" runat="server" CssClass="textbox" Width="400px"></asp:TextBox>
+                Practice Topic:<asp:TextBox ID="txtTopic" runat="server" CssClass="control-margin-left" Width="400px"></asp:TextBox>
                 <br />
-                Rental Cost:<asp:TextBox ID="txtRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
+                Rental Cost:<asp:TextBox ID="txtRentalCost" runat="server" CssClass="control-margin-left" Width="50px"></asp:TextBox>
                 <asp:CompareValidator ID="valRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number."
                     ControlToValidate="txtRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
                 <br />
-                Miscellaneous Expense:<asp:TextBox ID="txtMiscExpense" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
+                Miscellaneous Expense:<asp:TextBox ID="txtMiscExpense" runat="server" CssClass="control-margin-left" Width="50px">0.00</asp:TextBox>
                 <asp:CompareValidator ID="valMiscExpense" runat="server" ErrorMessage="Miscellaneous Expense must be a decimal number."
                     ControlToValidate="txtMiscExpense" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
                 <br />
-                Miscellaneous Revenue:<asp:TextBox ID="txtMiscRevenue" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
+                Miscellaneous Revenue:<asp:TextBox ID="txtMiscRevenue" runat="server" CssClass="control-margin-left" Width="50px">0.00</asp:TextBox>
                 <asp:CompareValidator ID="valMiscRevenue" runat="server" ErrorMessage="Miscellaneous Revenue must be a decimal number."
                     ControlToValidate="txtMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
@@ -83,32 +83,32 @@
                 <asp:Button ID="btnSaveDetails" runat="server" Text="Save practice details"
                     OnClick="btnSaveDetails_Click" ValidationGroup="vgPractice" />
                 <asp:Button ID="btnAddPractice" runat="server" Text="Add Practice" OnClick="btnAddPractice_Click"
-                    ValidationGroup="vgNewPractice" CssClass="textbox" />
-                <asp:Button ID="btnCancelAddPractice" runat="server" Text="Cancel" CssClass="textbox"
+                    ValidationGroup="vgNewPractice" CssClass="control-margin-left" />
+                <asp:Button ID="btnCancelAddPractice" runat="server" Text="Cancel" CssClass="control-margin-left"
                     OnClick="btnCancelAddPractice_Click" />
                 <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="warning" ValidationGroup="vgPractice" />
                 <asp:Label ID="lblSaveStatus" runat="server" Text=""></asp:Label>
             </asp:Panel>
             <br />
             <asp:Panel ID="panPracticeMembers" runat="server" Visible="false">
-                Member:<asp:DropDownList ID="ddlMembers" runat="server" CssClass="textbox" DataSourceID="odsMembers"
+                Member:<asp:DropDownList ID="ddlMembers" runat="server" CssClass="control-margin-left control-margin-right" DataSourceID="odsMembers"
                     DataTextField="FirstLastName" DataValueField="MemberID" OnDataBound="ddlMembers_DataBound"
                     OnSelectedIndexChanged="ddlMembers_SelectedIndexChanged" AutoPostBack="true">
                 </asp:DropDownList>
-                &nbsp;Unused punches:
+                Unused punches:
                 <asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
                 <asp:CustomValidator ID="valPunchesRemaining" runat="server" ErrorMessage="Member has no unused punches."
                     Display="Dynamic" ValidationGroup="vgAddMember" CssClass="warning" 
                     OnServerValidate="valPunchesRemaining_ServerValidate">*</asp:CustomValidator>
                 <br />
-                Payment method:<asp:DropDownList ID="ddlPaymentTypes" runat="server" CssClass="textbox"
+                Payment method:<asp:DropDownList ID="ddlPaymentTypes" runat="server" CssClass="control-margin-left control-margin-right"
                     OnSelectedIndexChanged="ddlPaymentTypes_SelectedIndexChanged" AutoPostBack="true">
                 </asp:DropDownList>
-                Amount:<asp:TextBox ID="txtPaymentAmount" runat="server" Width="50px" CssClass="textbox"></asp:TextBox>
+                Amount:<asp:TextBox ID="txtPaymentAmount" runat="server" Width="50px" CssClass="control-margin-left"></asp:TextBox>
                 <asp:CompareValidator ID="valPaymentAmount" runat="server" ErrorMessage="Amount must be a decimal number."
                     ControlToValidate="txtPaymentAmount" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
                     Type="Double" ValidationGroup="vgAddMember">*</asp:CompareValidator>
-                <asp:Button ID="btnCheckIn" runat="server" Text="Check in" CssClass="textbox"
+                <asp:Button ID="btnCheckIn" runat="server" Text="Check in" CssClass="control-margin-left"
                     OnClick="btnCheckIn_Click" ValidationGroup="vgAddMember" />
                 <asp:ValidationSummary ID="ValidationSummary3" runat="server" CssClass="warning" ValidationGroup="vgAddMember" />
                 <asp:GridView ID="gvAttendance" runat="server" DataSourceID="odsAttendance" AutoGenerateColumns="False"

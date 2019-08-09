@@ -13,19 +13,19 @@
         </SelectParameters>
     </asp:ObjectDataSource>
     <br />
-    Start Date<asp:TextBox ID="txtStartDate" runat="server" CssClass="textbox" Width="75px"></asp:TextBox>
+    Start Date<asp:TextBox ID="txtStartDate" runat="server" CssClass="control-margin-left" Width="75px"></asp:TextBox>
     <asp:CompareValidator ID="valStartDate" runat="server" ErrorMessage="Start Date must be a valid date."
-        ControlToValidate="txtStartDate" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" Type="Date"
+        ControlToValidate="txtStartDate" CssClass="warning control-margin-right" Display="Dynamic" Operator="DataTypeCheck" Type="Date"
         ValidationGroup="vgFilter">*</asp:CompareValidator>
-    &nbsp;End Date<asp:TextBox ID="txtEndDate" runat="server" CssClass="textbox" Width="75px"></asp:TextBox>
+    End Date<asp:TextBox ID="txtEndDate" runat="server" CssClass="control-margin-left" Width="75px"></asp:TextBox>
     <asp:CompareValidator ID="valEndDate" runat="server" ErrorMessage="End Date must be a valid date."
         ControlToValidate="txtEndDate" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck" Type="Date"
         ValidationGroup="vgFilter">*</asp:CompareValidator>
     <asp:CompareValidator ID="valCompareDates" runat="server" ErrorMessage="End Date must be later than Start Date."
         ControlToValidate="txtEndDate" CssClass="warning" Display="Dynamic" Operator="GreaterThan" Type="Date"
         ValidationGroup="vgFilter" ControlToCompare="txtStartDate">*</asp:CompareValidator>
-    <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="textbox" ValidationGroup="vgFilter" />
-    <asp:Button ID="btnReset" runat="server" Text="Clear" CssClass="textbox" CausesValidation="false" OnClick="btnReset_Click" />
+    <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="control-margin-left" ValidationGroup="vgFilter" />
+    <asp:Button ID="btnReset" runat="server" Text="Clear" CssClass="control-margin-left" CausesValidation="false" OnClick="btnReset_Click" />
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="warning" EnableClientScript="True" ValidationGroup="vgFilter" />
     <br />
     <br />

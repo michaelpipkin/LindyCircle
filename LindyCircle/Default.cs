@@ -9,9 +9,7 @@
 
 namespace LindyCircle
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class Default
     {
         public int DefaultID { get; set; }

@@ -36,27 +36,27 @@
         </Triggers>
         <ContentTemplate>
             Member:<asp:DropDownList ID="ddlMembers" runat="server" AutoPostBack="True" DataSourceID="odsMembers"
-                DataTextField="FirstLastName" DataValueField="MemberID" CssClass="textbox" CausesValidation="false" 
+                DataTextField="FirstLastName" DataValueField="MemberID" CssClass="control-margin-left control-margin-right" CausesValidation="false" 
                 ClientIDMode="Static" OnDataBound="ddlMembers_DataBound" OnSelectedIndexChanged="ddlMembers_SelectedIndexChanged">
             </asp:DropDownList>
-            &nbsp;&nbsp;Unused punches:&nbsp;&nbsp;<asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
+            Unused punches:<asp:Label ID="lblUnusedPunches" runat="server" Text="" CssClass="control-margin-left"></asp:Label>
             <br /><br />
             Purchase Date:<asp:TextBox ID="txtPurchaseDate" runat="server" ValidationGroup="vgPurchaseCard"
-                CssClass="textbox" Width="80px" ClientIDMode="Static"></asp:TextBox>
+                CssClass="control-margin-left" Width="80px" ClientIDMode="Static"></asp:TextBox>
             <asp:RequiredFieldValidator ID="valPurchaseDateRequired" runat="server" ErrorMessage="Purchase date is required."
                 ControlToValidate="txtPurchaseDate" CssClass="warning" Display="Dynamic" 
-                ValidationGroup="vgPurchaseCard">*&nbsp;</asp:RequiredFieldValidator>
+                ValidationGroup="vgPurchaseCard">*</asp:RequiredFieldValidator>
             <asp:CompareValidator ID="valPurchaseDateType" runat="server" ErrorMessage="Purchase date must be a valid date."
-                ControlToValidate="txtPurchaseDate" CssClass="warning" Operator="DataTypeCheck" Type="Date" 
-                ValidationGroup="vgPurchaseCard">*&nbsp;</asp:CompareValidator>
-            Amount:<asp:TextBox ID="txtAmount" runat="server" CssClass="textbox" ValidationGroup="vgPurchaseCard"
+                ControlToValidate="txtPurchaseDate" CssClass="warning control-margin-right" Operator="DataTypeCheck" Type="Date" 
+                ValidationGroup="vgPurchaseCard">*</asp:CompareValidator>
+            Amount:<asp:TextBox ID="txtAmount" runat="server" CssClass="control-margin-left" ValidationGroup="vgPurchaseCard"
                 Width="60px" ClientIDMode="Static"></asp:TextBox>
             <asp:RequiredFieldValidator ID="valAmountRequired" runat="server" ErrorMessage="Amount is required."
                 ControlToValidate="txtAmount" CssClass="warning" Display="Dynamic" 
-                ValidationGroup="vgPurchaseCard">*&nbsp;</asp:RequiredFieldValidator>
+                ValidationGroup="vgPurchaseCard">*</asp:RequiredFieldValidator>
             <asp:CompareValidator ID="valAmountType" runat="server" ErrorMessage="Amount must be a valid decimal number."
-                ControlToValidate="txtAmount" CssClass="warning" Operator="DataTypeCheck" Type="Currency" 
-                ValidationGroup="vgPurchaseCard">*&nbsp;</asp:CompareValidator>
+                ControlToValidate="txtAmount" CssClass="warning control-margin-right" Operator="DataTypeCheck" Type="Currency" 
+                ValidationGroup="vgPurchaseCard">*</asp:CompareValidator>
             <asp:Button ID="btnPurchase" runat="server" Text="Purchase Card" ValidateGroup="vgPurchaseCard"
                 UseSubmitBehavior="false" ClientIDMode="Static" OnClientClick="DisableForm();" OnClick="btnPurchase_Click" />
             <br />

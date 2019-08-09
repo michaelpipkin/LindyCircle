@@ -13,9 +13,9 @@
         </SelectParameters>
     </asp:ObjectDataSource>
     <br />
-    Practice Date:&nbsp;&nbsp;<asp:Label ID="lblPracticeDate" runat="server" Text=""></asp:Label>
+    Practice Date:<asp:Label ID="lblPracticeDate" runat="server" Text="" CssClass="control-margin-left"></asp:Label>
     <br />
-    Practice Number:<asp:TextBox ID="txtPracticeNumber" runat="server" CssClass="textbox" Width="30px"></asp:TextBox>
+    Practice Number:<asp:TextBox ID="txtPracticeNumber" runat="server" CssClass="control-margin-left" Width="30px"></asp:TextBox>
     <asp:RequiredFieldValidator ID="valPracticeNumberRequired" runat="server" ErrorMessage="Practice Number is required."
         CssClass="warning" Display="Dynamic" ControlToValidate="txtPracticeNumber" ValidationGroup="vgPractice">*</asp:RequiredFieldValidator>
     <asp:CompareValidator ID="valPracticeNumberType" runat="server" ErrorMessage="Practice Number must be a valid integer."
@@ -26,19 +26,19 @@
         ControlToValidate="txtPracticeNumber" ValidationGroup="vgPractice"
         OnServerValidate="valPracticeNumberUnique_ServerValidate">*</asp:CustomValidator>
     <br />
-    Practice Topic:<asp:TextBox ID="txtTopic" runat="server" CssClass="textbox" Width="400px"></asp:TextBox>
+    Practice Topic:<asp:TextBox ID="txtTopic" runat="server" CssClass="control-margin-left" Width="400px"></asp:TextBox>
     <br />
-    Rental Cost:<asp:TextBox ID="txtRentalCost" runat="server" CssClass="textbox" Width="50px"></asp:TextBox>
+    Rental Cost:<asp:TextBox ID="txtRentalCost" runat="server" CssClass="control-margin-left" Width="50px"></asp:TextBox>
     <asp:CompareValidator ID="valRentalCost" runat="server" ErrorMessage="Rental Cost must be a decimal number."
         ControlToValidate="txtRentalCost" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
         Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
     <br />
-    Miscellaneous Expense:<asp:TextBox ID="txtMiscExpense" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
+    Miscellaneous Expense:<asp:TextBox ID="txtMiscExpense" runat="server" CssClass="control-margin-left" Width="50px">0.00</asp:TextBox>
     <asp:CompareValidator ID="valMiscExpense" runat="server" ErrorMessage="Miscellaneous Expense must be a decimal number."
         ControlToValidate="txtMiscExpense" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
         Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>
     <br />
-    Miscellaneous Revenue:<asp:TextBox ID="txtMiscRevenue" runat="server" CssClass="textbox" Width="50px">0.00</asp:TextBox>
+    Miscellaneous Revenue:<asp:TextBox ID="txtMiscRevenue" runat="server" CssClass="control-margin-left" Width="50px">0.00</asp:TextBox>
     <asp:CompareValidator ID="valMiscRevenue" runat="server" ErrorMessage="Miscellaneous Revenue must be a decimal number."
         ControlToValidate="txtMiscRevenue" CssClass="warning" Display="Dynamic" Operator="DataTypeCheck"
         Type="Double" ValidationGroup="vgPractice">*</asp:CompareValidator>

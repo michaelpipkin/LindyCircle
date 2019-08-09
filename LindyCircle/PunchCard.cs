@@ -1,8 +1,6 @@
 namespace LindyCircle
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class PunchCard
     {
         public int PunchCardID { get; set; }

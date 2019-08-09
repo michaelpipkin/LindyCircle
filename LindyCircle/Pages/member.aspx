@@ -31,11 +31,11 @@
         </SelectParameters>
     </asp:ObjectDataSource>
     <br />
-    Member:&nbsp;&nbsp;<asp:Label ID="lblMemberName" runat="server" Text=""></asp:Label>
+    Member:<asp:Label ID="lblMemberName" runat="server" Text="" CssClass="control-margin-left"></asp:Label>
     <br />
-    Unused punches:&nbsp;&nbsp;<asp:Label ID="lblUnusedPunches" runat="server" Text=""></asp:Label>
+    Unused punches:<asp:Label ID="lblUnusedPunches" runat="server" Text="" CssClass="control-margin-left"></asp:Label>
     <br />
-    Total paid:&nbsp;&nbsp;<asp:Label ID="lblTotalPaid" runat="server" Text=""></asp:Label>
+    Total paid:<asp:Label ID="lblTotalPaid" runat="server" Text="" CssClass="control-margin-left"></asp:Label>
     <br />
     <asp:Panel ID="panGrids" runat="server" ClientIDMode="Static">
         <asp:GridView ID="gvHistory" runat="server" DataSourceID="odsMemberHistory" AutoGenerateColumns="false"

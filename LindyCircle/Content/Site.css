@@ -37,8 +37,12 @@ input[type="select"] {
     }
 }
 
-.textbox {
+.control-margin-left {
     margin-left: 10px;
+}
+
+.control-margin-right {
+    margin-right: 10px;
 }
 
 .warning {
