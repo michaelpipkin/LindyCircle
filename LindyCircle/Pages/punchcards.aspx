@@ -65,7 +65,7 @@
             <br />
             <asp:GridView ID="gvPunchCards" runat="server" DataSourceID="odsPunchCards" AutoGenerateColumns="False"
                 DataKeyNames="PunchCardID" EmptyDataText="This member has not purchased any punch cards." ShowFooter="true" 
-                OnDataBound="gvPunchCards_DataBound" OnRowDeleting="gvPunchCards_RowDeleting">
+                OnDataBound="gvPunchCards_DataBound" OnRowDeleting="gvPunchCards_RowDeleting" OnRowCommand="gvPunchCards_RowCommand">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
                 <Columns>
@@ -79,6 +79,15 @@
                         FooterStyle-CssClass="column-right-align">
                         <ItemStyle Width="75px" />
                     </asp:BoundField>
+                    <asp:BoundField DataField="RemainingPunches" HeaderText="Remaining Punches" HeaderStyle-Width="80px"
+                        HeaderStyle-CssClass="column-right-align" ItemStyle-CssClass="column-right-align" FooterStyle-CssClass="column-right-align"/>
+                    <asp:BoundField DataField="TransferMember" HeaderText="Transferred To/From" HeaderStyle-Width="125px" />
+                    <asp:TemplateField ItemStyle-CssClass="column-center-align" ItemStyle-Width="60px">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnTransfer" runat="server" Text="Transfer" CommandName="Transfer"
+                                CommandArgument='<%#Eval("PunchCardID") %>'></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField ItemStyle-CssClass="column-center-align" ItemStyle-Width="50px">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnDelete" runat="server" Text="Delete" CommandName="Delete"
@@ -87,6 +96,14 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+            <asp:Panel runat="server" ID="pnlTransfer" Visible="false">
+                <asp:HiddenField ID="hidPunchCardID" runat="server" />
+                <asp:Label ID="lblTransferText" runat="server" Text="" CssClass="control-margin-right"></asp:Label>
+                <asp:DropDownList ID="ddlTransferMember" runat="server" CssClass="control-margin-right" DataSourceID="odsMembers"
+                    DataTextField="FirstLastName" DataValueField="MemberID" AutoPostBack="false"></asp:DropDownList>
+                <asp:Button ID="btnTransfer" runat="server" Text="Transfer" CssClass="control-margin-left" OnClick="btnTransfer_Click" />
+                <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="control-margin-left" OnClick="btnCancel_Click" />
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

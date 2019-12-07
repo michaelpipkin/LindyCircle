@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LindyCircle.Pages {
-    
-    
-    public partial class punchcards {
-        
+namespace LindyCircle.Pages
+{
+
+
+    public partial class punchcards
+    {
+
         /// <summary>
         /// odsMembers control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource odsMembers;
-        
+
         /// <summary>
         /// odsPunchCards control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource odsPunchCards;
-        
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// ddlMembers control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMembers;
-        
+
         /// <summary>
         /// lblUnusedPunches control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblUnusedPunches;
-        
+
         /// <summary>
         /// txtPurchaseDate control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPurchaseDate;
-        
+
         /// <summary>
         /// valPurchaseDateRequired control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valPurchaseDateRequired;
-        
+
         /// <summary>
         /// valPurchaseDateType control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator valPurchaseDateType;
-        
+
         /// <summary>
         /// txtAmount control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAmount;
-        
+
         /// <summary>
         /// valAmountRequired control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valAmountRequired;
-        
+
         /// <summary>
         /// valAmountType control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator valAmountType;
-        
+
         /// <summary>
         /// btnPurchase control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPurchase;
-        
+
         /// <summary>
         /// ValidationSummary1 control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
-        
+
         /// <summary>
         /// lblWarning control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblWarning;
-        
+
         /// <summary>
         /// gvPunchCards control.
         /// </summary>
@@ -146,5 +148,59 @@ namespace LindyCircle.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvPunchCards;
+
+        /// <summary>
+        /// pnlTransfer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlTransfer;
+
+        /// <summary>
+        /// hidPunchCardID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidPunchCardID;
+
+        /// <summary>
+        /// lblTransferText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTransferText;
+
+        /// <summary>
+        /// ddlTransferMember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTransferMember;
+
+        /// <summary>
+        /// btnTransfer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTransfer;
+
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }

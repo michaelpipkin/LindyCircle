@@ -12,10 +12,12 @@ namespace LindyCircle.Pages
         }
 
         protected void btnNew_Click(object sender, EventArgs e) {
-            var member = new Member();
-            member.FirstName = txtFirstName.Text;
-            member.LastName = txtLastName.Text;
-            member.Inactive = false;
+            var member = new Member
+            {
+                FirstName = txtFirstName.Text,
+                LastName = txtLastName.Text,
+                Inactive = false
+            };
             using (var db = new LindyCircleContext()) {
                 if (db.Members.FirstOrDefault(t => t.FirstName == member.FirstName && t.LastName == member.LastName) == null) {
                     db.Members.Add(member);

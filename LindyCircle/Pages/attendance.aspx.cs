@@ -77,10 +77,12 @@ namespace LindyCircle.Pages
         protected void btnAddPractice_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
                 using (var db = new LindyCircleContext()) {
-                    var practice = new Practice();
-                    practice.PracticeNumber = int.Parse(txtPracticeNumber.Text);
-                    practice.PracticeDate = calPracticeDate.SelectedDate;
-                    practice.PracticeTopic = txtTopic.Text;
+                    var practice = new Practice
+                    {
+                        PracticeNumber = int.Parse(txtPracticeNumber.Text),
+                        PracticeDate = calPracticeDate.SelectedDate,
+                        PracticeTopic = txtTopic.Text
+                    };
                     if (string.IsNullOrEmpty(txtRentalCost.Text)) practice.PracticeCost = 0M;
                     else practice.PracticeCost = decimal.Parse(txtRentalCost.Text);
                     if (string.IsNullOrEmpty(txtMiscExpense.Text)) practice.MiscExpense = 0M;
@@ -136,17 +138,33 @@ namespace LindyCircle.Pages
 
         protected void btnCheckIn_Click(object sender, EventArgs e) {
             if (Page.IsValid) {
-                var attendance = new Attendance();
-                attendance.MemberID = int.Parse(ddlMembers.SelectedValue);
-                attendance.PracticeID = int.Parse(hidPracticeID.Value);
-                attendance.PaymentType = int.Parse(ddlPaymentTypes.SelectedValue);
+                int attendanceID, memberID, practiceID, paymentType;
+                memberID = int.Parse(ddlMembers.SelectedValue);
+                practiceID = int.Parse(hidPracticeID.Value);
+                paymentType = int.Parse(ddlPaymentTypes.SelectedValue);
+                var attendance = new Attendance
+                {
+                    MemberID = memberID,
+                    PracticeID = practiceID,
+                    PaymentType = paymentType
+                };
                 if (string.IsNullOrEmpty(txtPaymentAmount.Text)) attendance.PaymentAmount = 0M;
                 else attendance.PaymentAmount = decimal.Parse(txtPaymentAmount.Text);
                 using (var db = new LindyCircleContext()) {
                     db.Attendances.Add(attendance);
                     db.SaveChanges();
-                    gvAttendance.DataBind();
+                    if (paymentType == 2) {
+                        attendanceID = db.Attendances.Single(t => t.MemberID == memberID && t.PracticeID == practiceID).AttendanceID;
+                        var punchCardUsage = new PunchCardUsage
+                        {
+                            AttendanceID = attendanceID,
+                            PunchCardID = db.Members.Single(t => t.MemberID == memberID).PunchCardsHeld.First(t => t.RemainingPunches > 0).PunchCardID
+                        };
+                        db.PunchCardUsages.Add(punchCardUsage);
+                        db.SaveChanges();
+                    }
                 }
+                gvAttendance.DataBind();
             }
         }
 

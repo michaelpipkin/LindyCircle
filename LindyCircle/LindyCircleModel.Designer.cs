@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\mpipkin\Google Drive\Michael's Code\LindyCircle\LindyCircle\LindyCircleModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\mpipk\Source\Repos\bigtimebananas\LindyCircle\LindyCircle\LindyCircleModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

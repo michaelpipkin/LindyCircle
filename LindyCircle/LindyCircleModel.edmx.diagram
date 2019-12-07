@@ -12,7 +12,11 @@
         <EntityTypeShape EntityType="LindyCircleModel.PunchCard" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="LindyCircleModel.FK_Attendance_Members" ManuallyRouted="false" />
         <AssociationConnector Association="LindyCircleModel.FK_Attendance_Practices" ManuallyRouted="false" />
-        <AssociationConnector Association="LindyCircleModel.FK_PunchCards_Members" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LindyCircleModel.PunchCardUsage" Width="1.5" PointX="5.25" PointY="5.875" />
+        <AssociationConnector Association="LindyCircleModel.FK_PunchCardUsage_Attendance" />
+        <AssociationConnector Association="LindyCircleModel.FK_PunchCards_CurrentMembers" />
+        <AssociationConnector Association="LindyCircleModel.FK_PunchCards_PurchaseMembers" />
+        <AssociationConnector Association="LindyCircleModel.FK_PunchCardUsage_PunchCards" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

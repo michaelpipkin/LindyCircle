@@ -25,7 +25,7 @@ namespace LindyCircle
                             select t;
                 foreach (var row in query)
                     dt.Rows.Add(row.MemberID, row.FirstLastName, row.Attendances.Count, 
-                        row.PunchCards.Count, row.RemainingPunches, row.Inactive);
+                        row.PunchCardsPurchased.Count, row.RemainingPunches, row.Inactive);
             }
             return dt;
         }

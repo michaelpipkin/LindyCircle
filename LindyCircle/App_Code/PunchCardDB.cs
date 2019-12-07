@@ -14,13 +14,21 @@ namespace LindyCircle
             dt.Columns.Add("PunchCardID", typeof(int));
             dt.Columns.Add("PurchaseDate", typeof(DateTime));
             dt.Columns.Add("PurchaseAmount", typeof(decimal));
+            dt.Columns.Add("RemainingPunches", typeof(int));
+            dt.Columns.Add("TransferMember", typeof(string));
             using (var db = new LindyCircleContext()) {
                 var query = from t in db.PunchCards
-                            where t.MemberID == memberID
+                            where t.PurchaseMemberID == memberID || t.CurrentMemberID == memberID
                             orderby t.PurchaseDate
                             select t;
                 foreach (var row in query)
-                    dt.Rows.Add(row.PunchCardID, row.PurchaseDate, row.PurchaseAmount);
+                    dt.Rows.Add(row.PunchCardID, 
+                        row.PurchaseDate,
+                        row.PurchaseMemberID == memberID ? row.PurchaseAmount: 0,
+                        row.CurrentMemberID == memberID ? row.RemainingPunches : 0,
+                        row.PurchaseMemberID != row.CurrentMemberID ? 
+                            (row.PurchaseMemberID == memberID ? row.CurrentMember.FirstLastName : row.PurchaseMember.FirstLastName)
+                            : string.Empty);
             }
             return dt;
         }

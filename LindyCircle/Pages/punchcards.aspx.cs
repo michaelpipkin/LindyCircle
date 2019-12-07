@@ -23,10 +23,13 @@ namespace LindyCircle.Pages
         }
 
         protected void btnPurchase_Click(object sender, EventArgs e) {
-            var punchCard = new PunchCard();
-            punchCard.MemberID = int.Parse(ddlMembers.SelectedValue);
-            punchCard.PurchaseDate = DateTime.Parse(txtPurchaseDate.Text);
-            punchCard.PurchaseAmount = decimal.Parse(txtAmount.Text);
+            var punchCard = new PunchCard
+            {
+                PurchaseMemberID = int.Parse(ddlMembers.SelectedValue),
+                CurrentMemberID = int.Parse(ddlMembers.SelectedValue),
+                PurchaseDate = DateTime.Parse(txtPurchaseDate.Text),
+                PurchaseAmount = decimal.Parse(txtAmount.Text)
+            };
             using (var db = new LindyCircleContext()) {
                 db.PunchCards.Add(punchCard);
                 db.SaveChanges();
@@ -67,26 +70,77 @@ namespace LindyCircle.Pages
             if (gvPunchCards.Rows.Count > 0) {
                 var punchCardCount = 0;
                 var punchCardTotal = 0M;
+                var remainingPunchesTotal = 0;
                 foreach (GridViewRow row in gvPunchCards.Rows) {
                     if (row.RowType == DataControlRowType.DataRow) {
                         punchCardCount++;
                         punchCardTotal += decimal.Parse(row.Cells[2].Text);
+                        remainingPunchesTotal += int.Parse(row.Cells[3].Text);
                     }
                 }
                 gvPunchCards.FooterRow.Cells[1].Text = "Total: " + punchCardCount.ToString();
                 gvPunchCards.FooterRow.Cells[2].Text = punchCardTotal.ToString("#,##0.00");
+                gvPunchCards.FooterRow.Cells[3].Text = remainingPunchesTotal.ToString("0");
             }
         }
 
         protected void gvPunchCards_RowDeleting(object sender, GridViewDeleteEventArgs e) {
-            var memberID = int.Parse(ddlMembers.SelectedValue);
+            var punchCardID = (int)gvPunchCards.DataKeys[e.RowIndex].Value;
             using (var db = new LindyCircleContext()) {
-                var member = db.Members.Single(t => t.MemberID == memberID);
-                if (member.RemainingPunches < 5) {
-                    lblWarning.Text = "Unable to delete punch card - not enough punches remaining.";
+                var punchCard = db.PunchCards.Single(t => t.PunchCardID == punchCardID);
+                if (punchCard.RemainingPunches < 5) {
+                    lblWarning.Text = "Unable to delete used punch card.";
                     e.Cancel = true;
                 }
             }
+        }
+
+        protected void gvPunchCards_RowCommand(object sender, GridViewCommandEventArgs e) {
+            if (e.CommandName.Equals("Transfer")) {
+                var punchCardID = int.Parse(e.CommandArgument.ToString());
+                using (var db = new LindyCircleContext()) {
+                    var punchCard = db.PunchCards.Single(t => t.PunchCardID == punchCardID);
+                    if (punchCard.RemainingPunches == 0)
+                        lblWarning.Text = "Unable to transfer punch card with no punches remaining.";
+                    else {
+                        hidPunchCardID.Value = punchCardID.ToString();
+                        lblTransferText.Text = string.Format("Transfer {0} unused punches to ", punchCard.RemainingPunches);
+                        gvPunchCards.Visible = false;
+                        ddlMembers.Enabled = false;
+                        btnPurchase.Enabled = false;
+                        pnlTransfer.Visible = true;
+                        lblWarning.Text = string.Empty;
+                    }
+                }
+            }
+        }
+
+        protected void btnTransfer_Click(object sender, EventArgs e) {
+            if (ddlMembers.SelectedValue == ddlTransferMember.SelectedValue)
+                lblWarning.Text = "Cannot transfer punch card to the same member.";
+            else {
+                var punchCardID = int.Parse(hidPunchCardID.Value);
+                using (var db = new LindyCircleContext()) {
+                    var punchCard = db.PunchCards.Single(t => t.PunchCardID == punchCardID);
+                    punchCard.CurrentMemberID = int.Parse(ddlTransferMember.SelectedValue);
+                    db.SaveChanges();
+                    gvPunchCards.DataBind();
+                    gvPunchCards.Visible = true;
+                    pnlTransfer.Visible = false;
+                    ddlMembers.Enabled = true;
+                    btnPurchase.Enabled = true;
+                    lblWarning.Text = string.Empty;
+                }
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e) {
+            gvPunchCards.Visible = true;
+            pnlTransfer.Visible = false;
+            ddlMembers.Enabled = true;
+            btnPurchase.Enabled = true;
+            hidPunchCardID.Value = null;
+            lblWarning.Text = string.Empty;
         }
     }
 }

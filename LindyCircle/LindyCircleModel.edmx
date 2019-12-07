@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LindyCircleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LindyCircleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attendance">
           <Key>
             <PropertyRef Name="AttendanceID" />
@@ -49,9 +49,18 @@
             <PropertyRef Name="PunchCardID" />
           </Key>
           <Property Name="PunchCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="PurchaseMemberID" Type="int" Nullable="false" />
+          <Property Name="CurrentMemberID" Type="int" Nullable="false" />
           <Property Name="PurchaseDate" Type="date" Nullable="false" />
           <Property Name="PurchaseAmount" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PunchCardUsage">
+          <Key>
+            <PropertyRef Name="UsageID" />
+          </Key>
+          <Property Name="UsageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttendanceID" Type="int" Nullable="false" />
+          <Property Name="PunchCardID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Attendance_Members">
           <End Role="Members" Type="Self.Members" Multiplicity="1" />
@@ -77,7 +86,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PunchCards_Members">
+        <Association Name="FK_PunchCards_CurrentMembers">
           <End Role="Members" Type="Self.Members" Multiplicity="1" />
           <End Role="PunchCards" Type="Self.PunchCards" Multiplicity="*" />
           <ReferentialConstraint>
@@ -85,7 +94,43 @@
               <PropertyRef Name="MemberID" />
             </Principal>
             <Dependent Role="PunchCards">
+              <PropertyRef Name="CurrentMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCards_PurchaseMembers">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="PunchCards" Type="Self.PunchCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
               <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="PunchCards">
+              <PropertyRef Name="PurchaseMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCardUsage_Attendance">
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="1" />
+          <End Role="PunchCardUsage" Type="Self.PunchCardUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendance">
+              <PropertyRef Name="AttendanceID" />
+            </Principal>
+            <Dependent Role="PunchCardUsage">
+              <PropertyRef Name="AttendanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCardUsage_PunchCards">
+          <End Role="PunchCards" Type="Self.PunchCards" Multiplicity="1" />
+          <End Role="PunchCardUsage" Type="Self.PunchCardUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PunchCards">
+              <PropertyRef Name="PunchCardID" />
+            </Principal>
+            <Dependent Role="PunchCardUsage">
+              <PropertyRef Name="PunchCardID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -95,6 +140,7 @@
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbsa" store:Type="Tables" />
           <EntitySet Name="Practices" EntityType="Self.Practices" Schema="dbsa" store:Type="Tables" />
           <EntitySet Name="PunchCards" EntityType="Self.PunchCards" Schema="dbsa" store:Type="Tables" />
+          <EntitySet Name="PunchCardUsage" EntityType="Self.PunchCardUsage" Schema="dbsa" store:Type="Tables" />
           <AssociationSet Name="FK_Attendance_Members" Association="Self.FK_Attendance_Members">
             <End Role="Members" EntitySet="Members" />
             <End Role="Attendance" EntitySet="Attendance" />
@@ -103,13 +149,24 @@
             <End Role="Practices" EntitySet="Practices" />
             <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
-          <AssociationSet Name="FK_PunchCards_Members" Association="Self.FK_PunchCards_Members">
+          <AssociationSet Name="FK_PunchCards_CurrentMembers" Association="Self.FK_PunchCards_CurrentMembers">
             <End Role="Members" EntitySet="Members" />
             <End Role="PunchCards" EntitySet="PunchCards" />
           </AssociationSet>
+          <AssociationSet Name="FK_PunchCards_PurchaseMembers" Association="Self.FK_PunchCards_PurchaseMembers">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="PunchCards" EntitySet="PunchCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunchCardUsage_Attendance" Association="Self.FK_PunchCardUsage_Attendance">
+            <End Role="Attendance" EntitySet="Attendance" />
+            <End Role="PunchCardUsage" EntitySet="PunchCardUsage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunchCardUsage_PunchCards" Association="Self.FK_PunchCardUsage_PunchCards">
+            <End Role="PunchCards" EntitySet="PunchCards" />
+            <End Role="PunchCardUsage" EntitySet="PunchCardUsage" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LindyCircleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -124,6 +181,7 @@
           <Property Name="PaymentAmount" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Attendance_Members" FromRole="Attendance" ToRole="Members" />
           <NavigationProperty Name="Practice" Relationship="Self.FK_Attendance_Practices" FromRole="Attendance" ToRole="Practices" />
+          <NavigationProperty Name="PunchCardUsages" Relationship="LindyCircleModel.FK_PunchCardUsage_Attendance" FromRole="Attendance" ToRole="PunchCardUsage" />
         </EntityType>
         <EntityType Name="Default">
           <Key>
@@ -142,7 +200,8 @@
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Inactive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Members" FromRole="Members" ToRole="Attendance" />
-          <NavigationProperty Name="PunchCards" Relationship="Self.FK_PunchCards_Members" FromRole="Members" ToRole="PunchCards" />
+          <NavigationProperty Name="PunchCardsHeld" Relationship="LindyCircleModel.FK_PunchCards_CurrentMembers" FromRole="Member" ToRole="PunchCard" />
+          <NavigationProperty Name="PunchCardsPurchased" Relationship="LindyCircleModel.FK_PunchCards_PurchaseMembers" FromRole="Member" ToRole="PunchCard" />
         </EntityType>
         <EntityType Name="Practice">
           <Key>
@@ -162,10 +221,13 @@
             <PropertyRef Name="PunchCardID" />
           </Key>
           <Property Name="PunchCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MemberID" Type="Int32" Nullable="false" />
           <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="PurchaseAmount" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_PunchCards_Members" FromRole="PunchCards" ToRole="Members" />
+          <Property Name="PurchaseMemberID" Type="Int32" Nullable="false" />
+          <Property Name="CurrentMemberID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CurrentMember" Relationship="LindyCircleModel.FK_PunchCards_CurrentMembers" FromRole="PunchCard" ToRole="Member" />
+          <NavigationProperty Name="PurchaseMember" Relationship="LindyCircleModel.FK_PunchCards_PurchaseMembers" FromRole="PunchCard" ToRole="Member" />
+          <NavigationProperty Name="PunchCardUsages" Relationship="LindyCircleModel.FK_PunchCardUsage_PunchCards" FromRole="PunchCard" ToRole="PunchCardUsage" />
         </EntityType>
         <Association Name="FK_Attendance_Members">
           <End Role="Members" Type="Self.Member" Multiplicity="1" />
@@ -191,18 +253,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PunchCards_Members">
-          <End Role="Members" Type="Self.Member" Multiplicity="1" />
-          <End Role="PunchCards" Type="Self.PunchCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Members">
-              <PropertyRef Name="MemberID" />
-            </Principal>
-            <Dependent Role="PunchCards">
-              <PropertyRef Name="MemberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="LindyCircleEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Attendances" EntityType="Self.Attendance" />
           <EntitySet Name="Defaults" EntityType="Self.Default" />
@@ -217,11 +267,82 @@
             <End Role="Practices" EntitySet="Practices" />
             <End Role="Attendance" EntitySet="Attendances" />
           </AssociationSet>
-          <AssociationSet Name="FK_PunchCards_Members" Association="Self.FK_PunchCards_Members">
-            <End Role="Members" EntitySet="Members" />
-            <End Role="PunchCards" EntitySet="PunchCards" />
+          <EntitySet Name="PunchCardUsages" EntityType="LindyCircleModel.PunchCardUsage" />
+          <AssociationSet Name="FK_PunchCardUsage_Attendance" Association="LindyCircleModel.FK_PunchCardUsage_Attendance">
+            <End Role="Attendance" EntitySet="Attendances" />
+            <End Role="PunchCardUsage" EntitySet="PunchCardUsages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunchCards_CurrentMembers" Association="LindyCircleModel.FK_PunchCards_CurrentMembers">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="PunchCard" EntitySet="PunchCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunchCards_PurchaseMembers" Association="LindyCircleModel.FK_PunchCards_PurchaseMembers">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="PunchCard" EntitySet="PunchCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunchCardUsage_PunchCards" Association="LindyCircleModel.FK_PunchCardUsage_PunchCards">
+            <End Role="PunchCard" EntitySet="PunchCards" />
+            <End Role="PunchCardUsage" EntitySet="PunchCardUsages" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PunchCardUsage">
+          <Key>
+            <PropertyRef Name="UsageID" />
+          </Key>
+          <Property Name="UsageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" />
+          <Property Name="PunchCardID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attendance" Relationship="LindyCircleModel.FK_PunchCardUsage_Attendance" FromRole="PunchCardUsage" ToRole="Attendance" />
+          <NavigationProperty Name="PunchCard" Relationship="LindyCircleModel.FK_PunchCardUsage_PunchCards" FromRole="PunchCardUsage" ToRole="PunchCard" />
+        </EntityType>
+        <Association Name="FK_PunchCardUsage_Attendance">
+          <End Type="LindyCircleModel.Attendance" Role="Attendance" Multiplicity="1" />
+          <End Type="LindyCircleModel.PunchCardUsage" Role="PunchCardUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attendance">
+              <PropertyRef Name="AttendanceID" />
+            </Principal>
+            <Dependent Role="PunchCardUsage">
+              <PropertyRef Name="AttendanceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCards_CurrentMembers">
+          <End Type="LindyCircleModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="LindyCircleModel.PunchCard" Role="PunchCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="PunchCard">
+              <PropertyRef Name="CurrentMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCards_PurchaseMembers">
+          <End Type="LindyCircleModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="LindyCircleModel.PunchCard" Role="PunchCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="PunchCard">
+              <PropertyRef Name="PurchaseMemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunchCardUsage_PunchCards">
+          <End Type="LindyCircleModel.PunchCard" Role="PunchCard" Multiplicity="1" />
+          <End Type="LindyCircleModel.PunchCardUsage" Role="PunchCardUsage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PunchCard">
+              <PropertyRef Name="PunchCardID" />
+            </Principal>
+            <Dependent Role="PunchCardUsage">
+              <PropertyRef Name="PunchCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -274,10 +395,20 @@
           <EntitySetMapping Name="PunchCards">
             <EntityTypeMapping TypeName="LindyCircleModel.PunchCard">
               <MappingFragment StoreEntitySet="PunchCards">
+                <ScalarProperty Name="CurrentMemberID" ColumnName="CurrentMemberID" />
+                <ScalarProperty Name="PurchaseMemberID" ColumnName="PurchaseMemberID" />
                 <ScalarProperty Name="PunchCardID" ColumnName="PunchCardID" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
                 <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PunchCardUsages">
+            <EntityTypeMapping TypeName="LindyCircleModel.PunchCardUsage">
+              <MappingFragment StoreEntitySet="PunchCardUsage">
+                <ScalarProperty Name="PunchCardID" ColumnName="PunchCardID" />
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="UsageID" ColumnName="UsageID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

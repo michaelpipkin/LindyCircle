@@ -43,6 +43,13 @@ namespace LindyCircle
             using (var db = new LindyCircleContext()) {
                 var attendance = db.Attendances.SingleOrDefault(t => t.AttendanceID == attendanceID);
                 if (attendance != null) {
+                    if (attendance.PaymentType == 2) {
+                        var punchCardUsage = db.PunchCardUsages.SingleOrDefault(t => t.AttendanceID == attendanceID);
+                        if (punchCardUsage != null) {
+                            db.PunchCardUsages.Remove(punchCardUsage);
+                            db.SaveChanges();
+                        }
+                    }
                     db.Attendances.Remove(attendance);
                     db.SaveChanges();
                 }
