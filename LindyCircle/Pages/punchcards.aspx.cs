@@ -97,11 +97,14 @@ namespace LindyCircle.Pages
 
         protected void gvPunchCards_RowCommand(object sender, GridViewCommandEventArgs e) {
             if (e.CommandName.Equals("Transfer")) {
+                var memberID = int.Parse(ddlMembers.SelectedValue);
                 var punchCardID = int.Parse(e.CommandArgument.ToString());
                 using (var db = new LindyCircleContext()) {
                     var punchCard = db.PunchCards.Single(t => t.PunchCardID == punchCardID);
                     if (punchCard.RemainingPunches == 0)
                         lblWarning.Text = "Unable to transfer punch card with no punches remaining.";
+                    else if (punchCard.CurrentMemberID != memberID)
+                        lblWarning.Text = "This card has already been transferred.";
                     else {
                         hidPunchCardID.Value = punchCardID.ToString();
                         lblTransferText.Text = string.Format("Transfer {0} unused punches to ", punchCard.RemainingPunches);
