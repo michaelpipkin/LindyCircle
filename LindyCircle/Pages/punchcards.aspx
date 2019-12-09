@@ -29,6 +29,11 @@
             <asp:ControlParameter ControlID="ddlMembers" Name="memberID" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="odsTransferMembers" runat="server" SelectMethod="GetMemberList" TypeName="LindyCircle.MemberDB">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="ddlMembers" DefaultValue="0" Name="excludeMemberID" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
     <br />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <Triggers>
@@ -64,7 +69,7 @@
             <asp:Label ID="lblWarning" runat="server" Text="" CssClass="warning" ClientIDMode="Static"></asp:Label>
             <br />
             <asp:GridView ID="gvPunchCards" runat="server" DataSourceID="odsPunchCards" AutoGenerateColumns="False"
-                DataKeyNames="PunchCardID" EmptyDataText="This member has not purchased any punch cards." ShowFooter="true" 
+                DataKeyNames="PunchCardID" EmptyDataText="No punch cards found for this member." ShowFooter="true" 
                 OnDataBound="gvPunchCards_DataBound" OnRowDeleting="gvPunchCards_RowDeleting" OnRowCommand="gvPunchCards_RowCommand">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <FooterStyle BackColor="#AAAAAA" Font-Bold="true" />
@@ -99,7 +104,7 @@
             <asp:Panel runat="server" ID="pnlTransfer" Visible="false">
                 <asp:HiddenField ID="hidPunchCardID" runat="server" />
                 <asp:Label ID="lblTransferText" runat="server" Text="" CssClass="control-margin-right"></asp:Label>
-                <asp:DropDownList ID="ddlTransferMember" runat="server" CssClass="control-margin-right" DataSourceID="odsMembers"
+                <asp:DropDownList ID="ddlTransferMember" runat="server" CssClass="control-margin-right" DataSourceID="odsTransferMembers"
                     DataTextField="FirstLastName" DataValueField="MemberID" AutoPostBack="false"></asp:DropDownList>
                 <asp:Button ID="btnTransfer" runat="server" Text="Transfer" CssClass="control-margin-left" OnClick="btnTransfer_Click" />
                 <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="control-margin-left" OnClick="btnCancel_Click" />

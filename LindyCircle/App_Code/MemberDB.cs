@@ -37,6 +37,12 @@ namespace LindyCircle
         }
 
         [DataObjectMethod(DataObjectMethodType.Select)]
+        public static List<Member> GetMemberList(int excludeMemberID) {
+            using (var db = new LindyCircleContext())
+                return db.Members.Where(t => t.MemberID != excludeMemberID).OrderBy(t => t.FirstName).ThenBy(t => t.LastName).ToList();
+        }
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public static List<Member> GetActiveMemberList() {
             using (var db = new LindyCircleContext())
                 return db.Members.Where(t => !t.Inactive).OrderBy(t => t.FirstName).ThenBy(t => t.LastName).ToList();

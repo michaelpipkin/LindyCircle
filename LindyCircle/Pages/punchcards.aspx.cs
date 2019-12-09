@@ -107,6 +107,7 @@ namespace LindyCircle.Pages
                         lblWarning.Text = "This card has already been transferred.";
                     else {
                         hidPunchCardID.Value = punchCardID.ToString();
+                        ddlTransferMember.DataBind();
                         lblTransferText.Text = string.Format("Transfer {0} unused punches to ", punchCard.RemainingPunches);
                         gvPunchCards.Visible = false;
                         ddlMembers.Enabled = false;
@@ -128,16 +129,16 @@ namespace LindyCircle.Pages
                     punchCard.CurrentMemberID = int.Parse(ddlTransferMember.SelectedValue);
                     db.SaveChanges();
                     gvPunchCards.DataBind();
-                    gvPunchCards.Visible = true;
-                    pnlTransfer.Visible = false;
-                    ddlMembers.Enabled = true;
-                    btnPurchase.Enabled = true;
-                    lblWarning.Text = string.Empty;
+                    ResetTransferForm();
                 }
             }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e) {
+            ResetTransferForm();
+        }
+
+        protected void ResetTransferForm() {
             gvPunchCards.Visible = true;
             pnlTransfer.Visible = false;
             ddlMembers.Enabled = true;
